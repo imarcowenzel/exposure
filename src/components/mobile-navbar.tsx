@@ -34,7 +34,7 @@ const MobileNavbar = () => {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-black lg:hidden w-full">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-black lg:hidden">
       <NavbarContent>
         <NavbarBrand>
           <ContrastIcon className="h-8 w-8 text-white" />
