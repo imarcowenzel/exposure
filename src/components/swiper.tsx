@@ -2,10 +2,12 @@
 
 const SwiperPage = () => {
   return (
-    <section className="h-[720px] bg-black">
-
+    <h1>
       Swiper
-    </section>
+    </h1>
+    // <div className="h-[720px] bg-black">
+    //   Swiper
+    // </div>
   );
 };
 

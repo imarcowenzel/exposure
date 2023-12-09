@@ -1,16 +1,17 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import {
-    Navbar,
-    NavbarBrand,
-    NavbarContent,
-    NavbarMenu,
-    NavbarMenuItem,
-    NavbarMenuToggle,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
 } from "@nextui-org/react";
 import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { buttonVariants } from "./ui/button";
 
 const MobileNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ const MobileNavbar = () => {
     <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-black lg:hidden">
       <NavbarContent>
         <NavbarBrand>
-          <ContrastIcon className="h-8 w-8 text-white" />
+          <ContrastIcon className="h-9 w-9 text-white" />
         </NavbarBrand>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -45,11 +46,11 @@ const MobileNavbar = () => {
         />
       </NavbarContent>
 
-      <NavbarMenu className="bg-black px-5 pt-10">
+      <NavbarMenu className="bg-black px-6 pt-12">
         {menuItems.map((item) => (
           <NavbarMenuItem key={item.label}>
             <Link
-              className="flex items-center gap-x-4 pb-4 text-3xl text-white"
+              className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
               href={item.href}
             >
               {<item.icon className="h-6 w-6" />}
@@ -57,6 +58,26 @@ const MobileNavbar = () => {
             </Link>
           </NavbarMenuItem>
         ))}
+
+        <NavbarMenuItem className="pt-12">
+          <div className="flex w-full flex-col gap-y-4">
+            <Link
+              href="/sign-up"
+              className={buttonVariants({ variant: "secondary" })}
+            >
+              SIGN UP
+            </Link>
+            <Link
+              href="log-in"
+              className={buttonVariants({
+                variant: "outline",
+                className: "bg-black text-white hover:hover:bg-secondary/80",
+              })}
+            >
+              LOG IN
+            </Link>
+          </div>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
