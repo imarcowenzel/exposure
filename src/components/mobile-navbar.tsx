@@ -38,7 +38,7 @@ const MobileNavbar = () => {
     <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-black lg:hidden">
       <NavbarContent>
         <NavbarBrand>
-          <ContrastIcon className="h-9 w-9 text-white" />
+          <ContrastIcon size={36} color="#fff" />
         </NavbarBrand>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -53,7 +53,7 @@ const MobileNavbar = () => {
               className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
               href={item.href}
             >
-              {<item.icon className="h-6 w-6" />}
+              {<item.icon />}
               {item.label}
             </Link>
           </NavbarMenuItem>

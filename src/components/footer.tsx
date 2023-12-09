@@ -2,7 +2,9 @@ import { ContrastIcon } from "lucide-react";
 import Link from "next/link";
 
 const Footer: React.FC = () => {
+
   return (
+
     <footer className="flex h-fit w-full flex-col gap-y-10 bg-black px-5 py-10">
       {/* Footer Top */}
       <div className="w-full">
@@ -17,16 +19,20 @@ const Footer: React.FC = () => {
 
       {/* Footer Bottom */}
       <div className="w-full px-2 md:px-4">
+
         <div className="flex flex-col">
+
           {/* Footer Legal */}
           <div className="flex w-full flex-col justify-between gap-y-10 px-1 text-xs text-[#737373] md:flex-row">
+
             <div className="flex flex-col gap-y-2 md:flex-row md:gap-x-10 md:gap-y-0">
               <Link href={"/"}>Terms of Use</Link>
               <Link href={"/"}>Privacy Policy</Link>
               <Link href={"/"}>Cookie Notice</Link>
               <Link href={"/"}>Cookie Settings</Link>
             </div>
-            <p className="text-justify">
+
+            <p className="text-center">
               2023 &copy; Developed by{" "}
               <Link
                 href={"https://github.com/imarcowenzel"}
@@ -38,6 +44,7 @@ const Footer: React.FC = () => {
               </Link>{" "}
               with non-commercial porpuose.
             </p>
+
           </div>
         </div>
       </div>
