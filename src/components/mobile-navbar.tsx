@@ -1,20 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from "@nextui-org/react";
+import { AnimatePresence, MotionConfig, motion, useCycle } from "framer-motion";
 import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
-import { buttonVariants } from "./ui/button";
+
+import { buttonVariants } from "@/components/ui/button";
 
 const MobileNavbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mobileNav, toggleMobile] = useCycle(false, true);
 
   const menuItems = [
     {
@@ -35,51 +28,123 @@ const MobileNavbar = () => {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-black lg:hidden">
-      <NavbarContent>
-        <NavbarBrand>
-          <ContrastIcon size={36} color="#fff" />
-        </NavbarBrand>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="text-white sm:hidden"
-        />
-      </NavbarContent>
-
-      <NavbarMenu className="bg-black px-6 pt-12">
-        {menuItems.map((item) => (
-          <NavbarMenuItem key={item.label}>
-            <Link
-              className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
-              href={item.href}
-            >
-              {<item.icon />}
-              {item.label}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-
-        <NavbarMenuItem className="pt-12">
-          <div className="flex w-full flex-col gap-y-4">
-            <Link
-              href="/sign-up"
-              className={buttonVariants({ variant: "secondary" })}
-            >
-              SIGN UP
-            </Link>
-            <Link
-              href="log-in"
-              className={buttonVariants({
-                variant: "outline",
-                className: "bg-black text-white hover:hover:bg-secondary/80",
-              })}
-            >
-              LOG IN
-            </Link>
+    <nav className="sticky inset-0 z-50 h-full overflow-auto lg:hidden">
+      <div className="bg-black px-5 py-3">
+        {/* NAV */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center gap-x-1">
+            <ContrastIcon size={24} color="#fff" />
+            <h1 className="text-xs text-white">EXPOSURE</h1>
           </div>
-        </NavbarMenuItem>
-      </NavbarMenu>
-    </Navbar>
+
+          <div>
+            <motion.button
+              onClick={() => toggleMobile()}
+              animate={mobileNav ? "open" : "closed"}
+              className="flex flex-col space-y-1.5 text-white"
+              aria-label="Toggle Menu"
+            >
+              <motion.span
+                variants={{
+                  closed: { rotate: 0 },
+                  open: { rotate: 45, y: 3 },
+                }}
+                className="block h-px w-5 bg-white"
+              ></motion.span>
+              <motion.span
+                variants={{
+                  closed: { rotate: 0 },
+                  open: { rotate: -45, y: -3 },
+                }}
+                className="block h-px w-5 bg-white"
+              ></motion.span>
+            </motion.button>
+          </div>
+        </div>
+      </div>
+
+      {/* MENU */}
+      <AnimatePresence>
+        {mobileNav && (
+          <MotionConfig
+            transition={{
+              type: "spring",
+              bounce: 0,
+            }}
+          >
+            <motion.div
+              variants={{
+                open: {
+                  x: "0%",
+                  opacity: 1,
+                  transition: {
+                    when: "beforeChildren",
+                    type: "spring",
+                    bounce: 0,
+                  },
+                },
+
+                closed: {
+                  x: "-110%",
+                  opacity: 0,
+                  transition: {
+                    when: "afterChildren",
+                    type: "spring",
+                    bounce: 0,
+                  },
+                },
+              }}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="h-full touch-none bg-black px-5 py-10"
+            >
+              <motion.div
+                variants={{
+                  open: {
+                    y: "0%",
+                    opacity: 1,
+                  },
+                  closed: {
+                    y: "25%",
+                    opacity: 0,
+                  },
+                }}
+              >
+                {menuItems.map((item) => (
+                  <Link
+                    className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
+                    href={item.href}
+                  >
+                    {<item.icon />}
+                    {item.label}
+                  </Link>
+                ))}
+
+                <div className="flex w-full flex-col gap-y-4">
+                  <Link
+                    href="/sign-up"
+                    className={buttonVariants({ variant: "secondary" })}
+                  >
+                    SIGN UP
+                  </Link>
+                  <Link
+                    href="log-in"
+                    className={buttonVariants({
+                      variant: "outline",
+                      className:
+                        "bg-black text-white hover:hover:bg-secondary/80",
+                    })}
+                  >
+                    LOG IN
+                  </Link>
+                </div>
+              </motion.div>
+            </motion.div>
+          </MotionConfig>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
           {/* Footer Legal */}
           <div className="flex w-full flex-col justify-between gap-y-10 px-1 text-xs text-[#737373] md:flex-row">
 
-            <div className="flex flex-col gap-y-2 md:flex-row md:gap-x-10 md:gap-y-0">
+            <div className="flex flex-col gap-y-6 md:flex-row md:gap-x-10 md:gap-y-0">
               <Link href={"/"}>Terms of Use</Link>
               <Link href={"/"}>Privacy Policy</Link>
               <Link href={"/"}>Cookie Notice</Link>
