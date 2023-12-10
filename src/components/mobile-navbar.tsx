@@ -1,14 +1,28 @@
 "use client";
 
-import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion, useCycle } from "framer-motion";
 import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
-import { useEffect } from "react";
 
 const MobileNavbar = () => {
   const [mobileNav, toggleMobile] = useCycle(false, true);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    toggleMobile();
+  }, [pathname]);
+
+  const closeOnCurrent = (href: string) => {
+    console.log(pathname);
+    console.log(href);
+    if (pathname === href) {
+      toggleMobile();
+    }
+  };
 
   useEffect(() => {
     if (mobileNav) {
@@ -155,8 +169,9 @@ const MobileNavbar = () => {
               >
                 {menuItems.map((item) => (
                   <Link
-                    className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
+                    onClick={() => closeOnCurrent(item.href)}
                     href={item.href}
+                    className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
                   >
                     {<item.icon />}
                     {item.label}
@@ -166,12 +181,14 @@ const MobileNavbar = () => {
                 <div className="flex w-full flex-col gap-y-4">
                   <Link
                     href="/sign-up"
+                    onClick={() => closeOnCurrent("/sign-up")}
                     className={buttonVariants({ variant: "secondary" })}
                   >
                     SIGN UP
                   </Link>
                   <Link
-                    href="log-in"
+                    href="/log-in"
+                    onClick={() => closeOnCurrent("/log-in")}
                     className={buttonVariants({
                       variant: "outline",
                       className:
