@@ -38,27 +38,59 @@ const MobileNavbar = () => {
           </div>
 
           <div>
-            <motion.button
-              onClick={() => toggleMobile()}
-              animate={mobileNav ? "open" : "closed"}
-              className="flex flex-col space-y-1.5 text-white"
-              aria-label="Toggle Menu"
-            >
-              <motion.span
-                variants={{
-                  closed: { rotate: 0 },
-                  open: { rotate: 45, y: 3 },
-                }}
-                className="block h-px w-5 bg-white"
-              ></motion.span>
-              <motion.span
-                variants={{
-                  closed: { rotate: 0 },
-                  open: { rotate: -45, y: -3 },
-                }}
-                className="block h-px w-5 bg-white"
-              ></motion.span>
-            </motion.button>
+            <AnimatePresence>
+              <motion.button
+                onClick={() => toggleMobile()}
+                animate={mobileNav ? "open" : "closed"}
+                className="flex flex-col space-y-1.5 text-white"
+                aria-label="Toggle Menu"
+              >
+                <motion.span
+                  variants={{
+                    closed: {
+                      rotate: 0,
+                      transition: {
+                        when: "beforeChildren",
+                        type: "spring",
+                        bounce: 0,
+                      },
+                    },
+                    open: {
+                      rotate: 45,
+                      y: 3.5,
+                      transition: {
+                        when: "beforeChildren",
+                        type: "spring",
+                        bounce: 0,
+                      },
+                    },
+                  }}
+                  className="block h-px w-5 bg-white"
+                ></motion.span>
+                <motion.span
+                  variants={{
+                    closed: {
+                      rotate: 0,
+                      transition: {
+                        when: "beforeChildren",
+                        type: "spring",
+                        bounce: 0,
+                      },
+                    },
+                    open: {
+                      rotate: -45,
+                      y: -3.5,
+                      transition: {
+                        when: "beforeChildren",
+                        type: "spring",
+                        bounce: 0,
+                      },
+                    },
+                  }}
+                  className="block h-px w-5 bg-white"
+                ></motion.span>
+              </motion.button>
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -97,7 +129,7 @@ const MobileNavbar = () => {
               initial="closed"
               animate="open"
               exit="closed"
-              className="h-full touch-none bg-black px-5 py-10"
+              className="h-full touch-none overflow-hidden bg-black px-5 py-10"
             >
               <motion.div
                 variants={{
