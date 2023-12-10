@@ -17,10 +17,8 @@ const MobileNavbar = () => {
   }, [pathname]);
 
   const closeOnCurrent = (href: string) => {
-    console.log(pathname);
-    console.log(href);
     if (pathname === href) {
-      toggleMobile();
+      toggleMobile(0);
     }
   };
 
