@@ -5,9 +5,18 @@ import { AnimatePresence, MotionConfig, motion, useCycle } from "framer-motion";
 import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
+import { useEffect } from "react";
 
 const MobileNavbar = () => {
   const [mobileNav, toggleMobile] = useCycle(false, true);
+
+  useEffect(() => {
+    if (mobileNav) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [mobileNav]);
 
   const menuItems = [
     {
@@ -28,7 +37,7 @@ const MobileNavbar = () => {
   ];
 
   return (
-    <nav className="sticky inset-0 z-50 h-full overflow-auto lg:hidden">
+    <nav className="sticky inset-0 z-50 h-full overflow-y-hidden lg:hidden">
       <div className="bg-black px-5 py-3">
         {/* NAV */}
         <div className="flex items-center justify-between">
@@ -129,6 +138,7 @@ const MobileNavbar = () => {
               initial="closed"
               animate="open"
               exit="closed"
+              touch-none
               className="h-full touch-none overflow-hidden bg-black px-5 py-10"
             >
               <motion.div
