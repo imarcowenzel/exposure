@@ -13,7 +13,7 @@ const MobileNavbar = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    toggleMobile();
+    toggleMobile(0);
   }, [pathname]);
 
   const closeOnCurrent = (href: string) => {
@@ -55,9 +55,11 @@ const MobileNavbar = () => {
       <div className="bg-black px-5 py-3">
         {/* NAV */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center justify-center gap-x-1">
-            <ContrastIcon size={24} color="#fff" />
-            <h1 className="text-xs text-white">EXPOSURE</h1>
+          <div>
+            <Link href="/" className="flex items-center justify-center gap-x-1">
+              <ContrastIcon size={24} color="#fff" />
+              <h1 className="text-xs text-white">EXPOSURE</h1>
+            </Link>
           </div>
 
           <div>
