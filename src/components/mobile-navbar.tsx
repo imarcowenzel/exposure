@@ -152,7 +152,6 @@ const MobileNavbar = () => {
               initial="closed"
               animate="open"
               exit="closed"
-              touch-none
               className="h-full touch-none overflow-hidden bg-black px-5 py-10"
             >
               <motion.div
@@ -167,8 +166,9 @@ const MobileNavbar = () => {
                   },
                 }}
               >
-                {menuItems.map((item) => (
+                {menuItems.map((item, i) => (
                   <Link
+                    key={i}
                     onClick={() => closeOnCurrent(item.href)}
                     href={item.href}
                     className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
