@@ -49,7 +49,7 @@ const MobileNavbar = () => {
   ];
 
   return (
-    <nav className="sticky inset-0 z-50 h-full overflow-y-hidden lg:hidden">
+    <nav className="sticky inset-0 z-50 h-full overflow-y-hidden md:hidden">
       <div className="bg-black px-5 py-3">
         {/* NAV */}
         <div className="flex items-center justify-between">
@@ -123,7 +123,7 @@ const MobileNavbar = () => {
         {mobileNav && (
           <MotionConfig
             transition={{
-              type: "spring",
+              type: "just",
               bounce: 0,
             }}
           >
@@ -134,7 +134,7 @@ const MobileNavbar = () => {
                   opacity: 1,
                   transition: {
                     when: "beforeChildren",
-                    type: "spring",
+                    type: "just",
                     bounce: 0,
                   },
                 },
@@ -144,7 +144,7 @@ const MobileNavbar = () => {
                   opacity: 0,
                   transition: {
                     when: "afterChildren",
-                    type: "spring",
+                    type: "just",
                     bounce: 0,
                   },
                 },
