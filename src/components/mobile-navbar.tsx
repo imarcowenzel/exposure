@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, MotionConfig, motion, useCycle } from "framer-motion";
-import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
+import { ContrastIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -10,105 +10,84 @@ import { buttonVariants } from "@/components/ui/button";
 import { menuItems } from "@/config";
 
 const MobileNavbar = () => {
-
-  const [mobileNav, toggleMobile] = useCycle(false, true);
+  const [isOpen, toggleMenu] = useCycle(false, true);
   const pathname = usePathname();
 
   // Whenever we click an item in the menu and navigate away, we want to close the menu.
   useEffect(() => {
-    toggleMobile(0);
+    toggleMenu(0);
   }, [pathname]);
 
   // When we click the path we are currently on, we still want the mobile menu to close,
   // however we cant rely on the pathname for it because that won't change (we're already there)
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
-      toggleMobile(0);
+      toggleMenu(0);
     }
   };
 
   // Remove second scrollbar when mobile menu is open
   useEffect(() => {
-    if (mobileNav) {
+    if (isOpen) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
-  }, [mobileNav]);
+  }, [isOpen]);
 
   return (
-    <nav className="sticky inset-0 z-50 h-full overflow-y-hidden md:hidden">
+    <nav className="sticky inset-0 h-full overflow-y-hidden md:hidden">
       <div className="bg-black px-5 py-3">
-        {/* NAV */}
+        {/* Nav */}
         <div className="flex items-center justify-between">
+          {/* Nav Left */}
           <div>
-            <Link href="/" className="flex items-center justify-center gap-x-1">
-              <ContrastIcon size={24} color="#fff" />
-              <h1 className="text-xs text-white">EXPOSURE</h1>
+            <Link href="/" className="flex items-center gap-x-1 text-white">
+              <ContrastIcon size={24} />
+              <h1 className="text-xs leading-loose">EXPOSURE</h1>
             </Link>
           </div>
 
+          {/* Nav Right */}
           <div>
-            <AnimatePresence>
-              <motion.button
-                onClick={() => toggleMobile()}
-                animate={mobileNav ? "open" : "closed"}
-                className="flex flex-col space-y-1.5 text-white"
-                aria-label="Toggle Menu"
-              >
-                <motion.span
-                  variants={{
-                    closed: {
-                      rotate: 0,
-                      transition: {
-                        when: "beforeChildren",
-                        type: "spring",
-                        bounce: 0,
-                      },
-                    },
-                    open: {
-                      rotate: 45,
-                      y: 3.5,
-                      transition: {
-                        when: "beforeChildren",
-                        type: "spring",
-                        bounce: 0,
-                      },
-                    },
-                  }}
-                  className="block h-px w-5 bg-white"
-                ></motion.span>
-                <motion.span
-                  variants={{
-                    closed: {
-                      rotate: 0,
-                      transition: {
-                        when: "beforeChildren",
-                        type: "spring",
-                        bounce: 0,
-                      },
-                    },
-                    open: {
-                      rotate: -45,
-                      y: -3.5,
-                      transition: {
-                        when: "beforeChildren",
-                        type: "spring",
-                        bounce: 0,
-                      },
-                    },
-                  }}
-                  className="block h-px w-5 bg-white"
-                ></motion.span>
-              </motion.button>
-            </AnimatePresence>
+            <motion.button
+              onClick={() => toggleMenu()}
+              animate={isOpen ? "open" : "closed"}
+              className="flex flex-col space-y-1.5 text-white"
+              aria-label="Toggle Menu"
+            >
+              <motion.span
+                variants={{
+                  closed: {
+                    rotate: 0,
+                  },
+                  open: {
+                    rotate: 45,
+                    y: 3.5,
+                  },
+                }}
+                className="block h-px w-5 bg-white"
+              ></motion.span>
+              <motion.span
+                variants={{
+                  closed: {
+                    rotate: 0,
+                  },
+                  open: {
+                    rotate: -45,
+                    y: -3.5,
+                  },
+                }}
+                className="block h-px w-5 bg-white"
+              ></motion.span>
+            </motion.button>
           </div>
         </div>
       </div>
 
-      {/* MENU */}
+      {/* Menu */}
       <AnimatePresence>
-        {mobileNav && (
+        {isOpen && (
           <MotionConfig
             transition={{
               type: "just",
