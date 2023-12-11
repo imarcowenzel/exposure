@@ -1,4 +1,4 @@
-import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
+import { ContrastIcon } from "lucide-react";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { menuItems } from "@/config";
 const Sidebar: React.FC = () => {
 
   return (
-    <nav className="sticky left-0 top-0 z-20 hidden h-screen w-40 flex-col overflow-auto bg-black text-white lg:flex">
+    <nav className="sticky left-0 top-0 z-20 hidden h-screen w-40 flex-col overflow-hidden bg-black text-white lg:flex">
       <div className="mb-24 p-4">
         <Link href="/" className="flex items-center gap-x-2">
           <ContrastIcon className="h-9 w-9" />

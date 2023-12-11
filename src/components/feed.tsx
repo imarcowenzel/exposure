@@ -1,36 +1,34 @@
-import Link from "next/link";
-import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { pics } from "@/config";
 
 const Feed = () => {
   return (
-    <div className="flex flex-col gap-10 px-7 py-16 2xl:px-40">
-
+    <div className="flex flex-col gap-y-10 px-7 py-16 md:w-full md:px-11 lg:px-16 2xl:px-40">
       <div className="flex items-center gap-x-2">
         <ChevronRight size={36} strokeWidth={5} />
         <h1 className="text-3xl font-bold">FROM THE COMMUNITY</h1>
       </div>
 
-      <div className="flex w-full flex-wrap items-center justify-center gap-x-16 lg:w-11/12">
+      <div className="flex flex-wrap items-center justify-center gap-y-8 md:gap-x-6 md:gap-y-20">
         {pics.map((pic, i) => (
           <figure
             key={i}
-            className="mb-8 flex w-full flex-col gap-y-2 md:mb-6 md:w-60 md:px-0 lg:w-80"
+            className="flex flex-col gap-y-2 md:flex-auto md:px-0 lg:w-80"
           >
             {/* Image Container */}
             <Link href={`#`}>
-              <div className="w-full max-w-sm">
-                <Image
-                  src={pic.href}
-                  alt="Picture"
-                  height={500}
-                  width={500}
-                  className="w-full"
-                  priority
-                />
-              </div>
+              <Image
+                src={pic.href}
+                alt="Picture"
+                loading="eager"
+                height={500}
+                width={500}
+                className="w-full md:w-96"
+                priority
+              />
             </Link>
 
             {/* Caption Container */}
@@ -49,16 +47,10 @@ const Feed = () => {
 
                 <h6 className="text-xs text-[#737373]">{`${pic.createdBy}`}</h6>
               </Link>
-              {/* 
-             <div className="flex items-center justify-between gap-x-1">
-               {post.likes.length !== 0 && <p>{post.likes.length}</p>}
-               <LikeButton post={post} user={user} />
-             </div> */}
             </figcaption>
           </figure>
         ))}
       </div>
-
     </div>
   );
 };
