@@ -129,7 +129,6 @@ const SignUp = () => {
       <Separator />
 
 
-
     </div>
   );
 };
