@@ -6,6 +6,7 @@ import MobileNavbar from "@/components/mobile-navbar";
 import Sidebar from "@/components/sidebar";
 import { Providers } from "@/providers";
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
@@ -23,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <Providers>
-          <main className="flex">
+          <main className="flex flex-row">
             <Sidebar />
             <section className="flex min-h-[100dvh] flex-1 flex-col">
               <MobileNavbar />

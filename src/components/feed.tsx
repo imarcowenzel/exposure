@@ -22,12 +22,12 @@ const Feed = () => {
             <Link href={`#`}>
               <Image
                 src={pic.href}
+                priority
                 alt="Picture"
                 loading="eager"
                 height={500}
                 width={500}
                 className="w-full md:w-96"
-                priority
               />
             </Link>
 
