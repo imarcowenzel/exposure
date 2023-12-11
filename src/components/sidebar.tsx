@@ -1,28 +1,13 @@
-import Link from "next/link";
-import { buttonVariants } from "./ui/button";
 import { ContrastIcon, Globe, Search, Smile } from "lucide-react";
+import Link from "next/link";
+
+import { buttonVariants } from "@/components/ui/button";
+import { menuItems } from "@/config";
 
 const Sidebar: React.FC = () => {
-  const NavItems = [
-    {
-      label: "Explore",
-      href: "/",
-      icon: Globe,
-    },
-    {
-      label: "Search",
-      href: "/search",
-      icon: Search,
-    },
-    {
-      label: "Profile",
-      href: "/profile",
-      icon: Smile,
-    },
-  ];
 
   return (
-    <nav className="hidden lg:flex sticky left-0 top-0 z-20 h-screen w-40 flex-col overflow-auto bg-black text-white">
+    <nav className="sticky left-0 top-0 z-20 hidden h-screen w-40 flex-col overflow-auto bg-black text-white lg:flex">
       <div className="mb-24 p-4">
         <Link href="/" className="flex items-center gap-x-2">
           <ContrastIcon className="h-9 w-9" />
@@ -32,13 +17,13 @@ const Sidebar: React.FC = () => {
 
       <nav className="mb-24 w-full">
         <div className="flex flex-col items-start gap-y-3">
-          {NavItems.map((item) => (
+          {menuItems.map((item) => (
             <div
-            key={item.label}
+              key={item.label}
               className={buttonVariants({
                 variant: "ghost",
                 className:
-                  "w-full cursor-pointer rounded-none hover:bg-[#737373] hover:text-white",
+                  "w-full cursor-pointer rounded-none hover:bg-gray-900 hover:text-white",
               })}
             >
               <Link

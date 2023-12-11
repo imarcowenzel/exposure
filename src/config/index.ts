@@ -1,8 +1,9 @@
+import { Globe, Search, Smile } from "lucide-react";
+
 type PicsProps = {
     href: string;
     createdBy: string;
 }[];
-
 
 export const pics: PicsProps = [
     {
@@ -38,3 +39,21 @@ export const pics: PicsProps = [
         createdBy: "Peter"
     },
 ];
+
+export const menuItems = [
+    {
+      label: "Explore",
+      href: "/",
+      icon: Globe,
+    },
+    {
+      label: "Search",
+      href: "/search",
+      icon: Search,
+    },
+    {
+      label: "Profile",
+      href: "/profile",
+      icon: Smile,
+    },
+  ];

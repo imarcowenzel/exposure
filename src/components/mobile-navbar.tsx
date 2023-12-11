@@ -7,21 +7,27 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
+import { menuItems } from "@/config";
 
 const MobileNavbar = () => {
+
   const [mobileNav, toggleMobile] = useCycle(false, true);
   const pathname = usePathname();
 
+  // Whenever we click an item in the menu and navigate away, we want to close the menu.
   useEffect(() => {
     toggleMobile(0);
   }, [pathname]);
 
+  // When we click the path we are currently on, we still want the mobile menu to close,
+  // however we cant rely on the pathname for it because that won't change (we're already there)
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
       toggleMobile(0);
     }
   };
 
+  // Remove second scrollbar when mobile menu is open
   useEffect(() => {
     if (mobileNav) {
       document.body.classList.add("overflow-hidden");
@@ -29,24 +35,6 @@ const MobileNavbar = () => {
       document.body.classList.remove("overflow-hidden");
     }
   }, [mobileNav]);
-
-  const menuItems = [
-    {
-      label: "Explore",
-      href: "/",
-      icon: Globe,
-    },
-    {
-      label: "Search",
-      href: "/search",
-      icon: Search,
-    },
-    {
-      label: "Profile",
-      href: "/profile",
-      icon: Smile,
-    },
-  ];
 
   return (
     <nav className="sticky inset-0 z-50 h-full overflow-y-hidden md:hidden">
