@@ -3,9 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { pics } from "@/config";
+import { PostType } from "@/types";
 
-const Feed = () => {
+type FeedProps = {
+  posts: PostType[];
+}
+
+const Feed: React.FC<FeedProps> = ({posts}) => {
+
   return (
+
     <div className="flex flex-col gap-y-10 px-6 py-16 md:w-full md:px-16 2xl:px-24">
       
       <div className="flex items-center gap-x-2">
@@ -14,7 +21,7 @@ const Feed = () => {
       </div>
 
       <div className="grid grid-cols-2 items-center justify-center gap-y-8 gap-x-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 2xl:grid-cols-5">
-        {pics.map((pic, i) => (
+        {posts.map((post, i) => (
           <figure
             key={i}
             className="flex flex-col gap-y-2"
@@ -22,7 +29,7 @@ const Feed = () => {
             {/* Image Container */}
             <Link href={`#`}>
               <Image
-                src={pic.href}
+                src={post.imageUrl}
                 priority
                 alt="Picture"
                 loading="eager"
@@ -35,24 +42,26 @@ const Feed = () => {
             <figcaption className="flex items-center justify-between px-2">
               <Link href={`#`} className="flex items-center gap-x-4">
                 <div className="relative h-6 w-6">
-                  {/* <Image
+                  <Image
                    src={post.profileImage || "/assets/profile-picture.svg"}
                    alt={JSON.stringify(post._id)}
                    fill
                    priority
                    sizes="100svh"
                    className="rounded-full object-cover"
-                 /> */}
+                 />
                 </div>
 
-                <h6 className="text-xs text-[#737373]">{`${pic.createdBy}`}</h6>
+                <h6 className="text-xs text-[#737373]">{`${post.createdBy}`}</h6>
               </Link>
             </figcaption>
           </figure>
         ))}
       </div>
     </div>
+
   );
+
 };
 
 export default Feed;
