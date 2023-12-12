@@ -1,6 +1,6 @@
 "use client";
 
-import { ContrastIcon, Settings } from "lucide-react";
+import { ContrastIcon, Search, Settings } from "lucide-react";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
             >
               <Link
                 href={item.href}
-                className="flex w-full items-center gap-x-2 text-lg font-bold"
+                className="flex w-full items-center gap-x-2 text-lg"
               >
                 {<item.icon className="h-6 w-6" />}
                 {item.label}
@@ -53,8 +53,23 @@ const Sidebar: React.FC = () => {
               })}
             >
               <Link
+                href="/search"
+                className="flex w-full items-center gap-x-2 text-lg"
+              >
+                {<Search className="h-6 w-6" />}
+                Search
+              </Link>
+            </div>
+            <div
+              className={buttonVariants({
+                variant: "ghost",
+                className:
+                  "w-full cursor-pointer rounded-none transition duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
+              })}
+            >
+              <Link
                 href="/account"
-                className="flex w-full items-center gap-x-2 text-lg font-bold"
+                className="flex w-full items-center gap-x-2 text-lg"
               >
                 {<Settings className="h-6 w-6" />}
                 Account

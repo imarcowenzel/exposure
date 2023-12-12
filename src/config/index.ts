@@ -1,4 +1,4 @@
-import { Globe, Search, Smile } from "lucide-react";
+import { Globe, Search, Send, Smile } from "lucide-react";
 
 type PicsProps = {
     href: string;
@@ -47,9 +47,9 @@ export const menuItems = [
       icon: Globe,
     },
     {
-      label: "Search",
-      href: "/search",
-      icon: Search,
+      label: "Submit",
+      href: "/submit",
+      icon: Send,
     },
     {
       label: "Profile",
