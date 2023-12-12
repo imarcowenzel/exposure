@@ -26,7 +26,7 @@ export default function RootLayout({
         <Providers>
           <main className="flex flex-row">
             <Sidebar />
-            <section className="flex min-h-[100dvh] flex-1 flex-col">
+            <section className="flex  min-h-[100dvh] flex-1 flex-col">
               <MobileNavbar />
               <div className="h-full">{children}</div>
               <Footer />

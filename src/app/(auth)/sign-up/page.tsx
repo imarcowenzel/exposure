@@ -56,114 +56,119 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-y-10 px-9 pb-20 pt-10">
-      <div>
-        <h1 className="text-xl font-bold">Sign up for an account</h1>
-      </div>
+    <div className="flex items-center justify-center px-9 pb-20 pt-10">
 
-      <div className="w-full">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="Email"
-                      {...field}
-                      className="rounded-lg border-none bg-[#f6f6f6] p-6"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="Username"
-                      {...field}
-                      className="rounded-lg border-none bg-[#f6f6f6] p-6"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      {...field}
-                      className="rounded-lg border-none bg-[#f6f6f6] p-6"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Confirm password"
-                      {...field}
-                      className="rounded-lg border-none bg-[#f6f6f6] p-6"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              disabled={form.formState.isSubmitting || !form.formState.isValid}
-              className="w-full py-6"
-            >
-              {/* TODO: progress component */}
-              Sign up
-            </Button>
-          </form>
-        </Form>
-      </div>
+      <div className="flex flex-col items-center gap-y-10 md:w-1/2 lg:w-1/3">
+        <div>
+          <h1 className="text-xl font-bold">Sign up for an account</h1>
+        </div>
 
-      <div>
-        <Link href="/log-in" className="text-sm font-bold underline">
-          or login into your account.
-        </Link>
-      </div>
+        <div className="w-full">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="Email"
+                        {...field}
+                        className="rounded-lg border-none bg-[#f6f6f6] p-6"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="Username"
+                        {...field}
+                        className="rounded-lg border-none bg-[#f6f6f6] p-6"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Password"
+                        {...field}
+                        className="rounded-lg border-none bg-[#f6f6f6] p-6"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Confirm password"
+                        {...field}
+                        className="rounded-lg border-none bg-[#f6f6f6] p-6"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                disabled={
+                  form.formState.isSubmitting || !form.formState.isValid
+                }
+                className="w-full py-6"
+              >
+                {/* TODO: progress component */}
+                Sign up
+              </Button>
+            </form>
+          </Form>
+        </div>
 
-      <Separator />
-
-      <div className="w-full">
-        <Button className="flex w-full gap-x-2 py-6">
-          <GoogleIcon size={24} />
-          Sign in with Google
-        </Button>
-      </div>
-
-      <div>
-        <p className="text-xs">
-          By signing up, you agree to EXPOSURES's{" "}
-          <Link href="#" className="font-bold">
-            Terms of Use & Privacy Policy
+        <div>
+          <Link href="/log-in" className="text-sm font-bold underline">
+            or login into your account.
           </Link>
-        </p>
+        </div>
+
+        <Separator />
+
+        <div className="w-full">
+          <Button className="flex w-full gap-x-2 py-6">
+            <GoogleIcon size={24} />
+            Sign in with Google
+          </Button>
+        </div>
+
+        <div>
+          <p className="text-xs">
+            By signing up, you agree to EXPOSURES's{" "}
+            <Link href="#" className="font-bold">
+              Terms of Use & Privacy Policy
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
