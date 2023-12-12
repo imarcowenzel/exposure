@@ -7,6 +7,7 @@ import { pics } from "@/config";
 const Feed = () => {
   return (
     <div className="flex flex-col gap-y-10 px-7 py-16 md:w-full md:px-11 lg:px-16 2xl:px-40">
+      
       <div className="flex items-center gap-x-2">
         <ChevronRight size={36} strokeWidth={5} />
         <h1 className="text-3xl font-bold">FROM THE COMMUNITY</h1>

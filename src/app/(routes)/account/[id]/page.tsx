@@ -1,13 +1,14 @@
 "use client";
 
+import { Separator } from "@/components/ui/separator";
 import {
-    Button,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    useDisclosure,
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
 import Image from "next/image";
 import { PiSignOutFill as LogOutIcon } from "react-icons/pi";
@@ -41,7 +42,7 @@ const Account = () => {
 
         {/* Account Bottom */}
         <div className="flex w-full flex-col items-center justify-center gap-y-7">
-          <hr className="h-px w-1/5 bg-[#ccc]" />
+          <Separator className="w-1/5" />
 
           <h3 className="text-sm font-bold">Profile</h3>
 
@@ -110,7 +111,7 @@ const Account = () => {
                 name="deletePhoto"
                 aria-label="Delete Photo"
                 onClick={() => {}}
-                className="whitespace-nowrap text-sm font-semibold text-red-700"
+                className="whitespace-nowrap text-sm font-semibold text-red-500"
               >
                 Delete photo
               </button>
@@ -136,14 +137,14 @@ const Account = () => {
               <button
                 type="submit"
                 aria-label="Save Changes"
-                className="flex w-full items-center justify-center border-2 border-[#88888] bg-transparent p-3 text-xs text-[#88888] hover:border-black hover:text-black"
+                className="flex w-full items-center justify-center border-2 border-[#88888] bg-transparent p-3 text-xs text-[#88888] transition duration-300 ease-in-out hover:border-black hover:text-black"
               >
                 Save changes
               </button>
             </form>
           </div>
 
-          <hr className="h-px w-1/5 bg-[#ccc]" />
+          <Separator className="w-1/5" />
 
           <h3 className="text-sm font-bold">Password</h3>
 
@@ -186,20 +187,20 @@ const Account = () => {
               <button
                 type="submit"
                 aria-label="Save Changes"
-                className="flex w-full items-center justify-center border-2 border-[#88888] bg-transparent p-3 text-xs text-[#88888] hover:border-black hover:text-black"
+                className="flex w-full items-center justify-center border-2 border-[#88888] bg-transparent p-3 text-xs text-[#88888] transition duration-300 ease-in-out hover:border-black hover:text-black"
               >
                 Save changes
               </button>
             </form>
           </div>
 
-          <hr className="h-px w-1/5 bg-[#ccc]" />
+          <Separator className="w-1/5" />
 
           {/* Delete Account */}
           <div className="flex w-11/12 items-center justify-center lg:w-3/4">
             <button
               onClick={onOpen}
-              className="flex w-full items-center justify-center bg-red-500 p-3 text-xs font-bold text-white hover:bg-red-600"
+              className="flex w-full items-center justify-center bg-red-500 p-3 text-xs font-bold text-white transition duration-300 ease-in-out hover:bg-red-600"
             >
               Delete my account
             </button>
@@ -236,7 +237,7 @@ const Account = () => {
                           className="w-full border-2 border-[#88888] bg-transparent p-2 pl-4 placeholder:text-sm placeholder:font-bold focus-within:border-black"
                         />
                         <Button
-                          className="flex w-full items-center justify-center bg-red-500 p-3 text-xs font-bold text-white hover:bg-red-600"
+                          className="flex w-full items-center justify-center bg-red-500 p-3 text-xs font-bold text-white transition duration-300 ease-in-out hover:bg-red-600"
                           onPress={onClose}
                         >
                           Delete EXPOSURE account

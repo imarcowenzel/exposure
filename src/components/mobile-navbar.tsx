@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, MotionConfig, motion, useCycle } from "framer-motion";
-import { ContrastIcon } from "lucide-react";
+import { ContrastIcon, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -144,6 +144,15 @@ const MobileNavbar = () => {
                     {item.label}
                   </Link>
                 ))}
+
+                <Link
+                  onClick={() => closeOnCurrent("/account")}
+                  href="/account"
+                  className="flex items-center gap-x-3 pb-10 text-3xl font-semibold tracking-widest text-white"
+                >
+                  <Settings />
+                  Account
+                </Link>
 
                 <div className="flex w-full flex-col gap-y-4">
                   <Link
