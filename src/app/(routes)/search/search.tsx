@@ -25,15 +25,11 @@ const Search = () => {
   });
 
   return (
-    <div className="flex min-h-[calc(100dvh-497px)] w-full flex-col items-center justify-center gap-y-10 py-12 px-6 md:min-h-[calc(100dvh-321px)] lg:min-h-[calc(100dvh-256.98px)]">
-
-      <div className="flex w-full flex-col items-center justify-center gap-y-8">
-
-        <div className="w-full flex justify-center items-center flex-col gap-y-2">
-
+    <div className="flex min-h-[calc(100dvh-497px)] w-full flex-col items-center justify-center gap-y-10 py-12 md:min-h-[calc(100dvh-321px)] lg:min-h-[calc(100dvh-256.98px)]">
+      <div className="flex w-11/12 flex-col items-center justify-center gap-y-8 md:w-10/12 lg:w-1/2">
+        <div className="flex w-full flex-col items-center justify-center gap-y-2">
           <Form {...form} className="w-full">
-            <form className="w-full flex justify-between md:w-3/4">
-
+            <form className="flex w-full justify-between">
               <FormField
                 control={form.control}
                 name="query"
@@ -43,27 +39,23 @@ const Search = () => {
                       formNoValidate
                       placeholder="Search by tag or author"
                       {...field}
-                      className="w-full border-none bg-transparent p-3 focus-visible:ring-0 focus-visible:ring-transparent text-lg"
+                      className="w-full border-none bg-transparent p-3 text-lg md:text-2xl focus-visible:ring-0 focus-visible:ring-transparent"
                     />
                   </FormItem>
                 )}
               />
 
               <Button variant={"ghost"} className="hover:bg-transparent">
-                <SearchIcon className="text-xl" />
+                <SearchIcon className="text-2xl" />
               </Button>
-
             </form>
           </Form>
 
           <Separator className="flex justify-center" />
-
         </div>
 
         {/*{searchResults && <SearchResult posts={searchResults} />} */}
       </div>
-
-
     </div>
   );
 };
