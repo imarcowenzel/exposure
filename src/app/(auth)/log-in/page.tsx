@@ -45,7 +45,9 @@ const LogIn = () => {
 
   return (
     <div className="flex items-center justify-center px-9 pb-20 pt-10">
+
       <div className="flex flex-col items-center gap-y-10 md:w-1/2 lg:w-1/3">
+
         <div>
           <h1 className="text-xl font-bold">Log in into your account</h1>
         </div>
@@ -114,6 +116,7 @@ const LogIn = () => {
           </Button>
         </div>
       </div>
+      
     </div>
   );
 };
