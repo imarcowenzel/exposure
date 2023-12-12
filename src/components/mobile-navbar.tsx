@@ -36,7 +36,7 @@ const MobileNavbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="sticky inset-0 h-full overflow-y-hidden lg:hidden">
+    <nav className="sticky inset-0 z-50 h-full overflow-y-hidden lg:hidden">
       <div className="bg-black px-5 py-3">
         {/* Nav */}
         <div className="flex items-center justify-between">
