@@ -46,6 +46,7 @@ const SignUp = () => {
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
       username: "",
     },
   });
@@ -133,14 +134,13 @@ const SignUp = () => {
                 )}
               />
               <Button
-                type="submit"
                 disabled={
                   form.formState.isSubmitting || !form.formState.isValid
                 }
                 className="w-full py-6"
               >
                 {/* TODO: progress component */}
-                Sign up
+                SIGN UP
               </Button>
             </form>
           </Form>
@@ -148,7 +148,7 @@ const SignUp = () => {
 
         <div>
           <Link href="/log-in" className="text-sm font-bold underline">
-            or login into your account.
+            or log in into your account.
           </Link>
         </div>
 
@@ -157,7 +157,7 @@ const SignUp = () => {
         <div className="w-full">
           <Button className="flex w-full gap-x-2 py-6">
             <GoogleIcon size={24} />
-            Sign in with Google
+            Google
           </Button>
         </div>
 
