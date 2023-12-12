@@ -6,18 +6,18 @@ import { pics } from "@/config";
 
 const Feed = () => {
   return (
-    <div className="flex flex-col gap-y-10 px-7 py-16 md:w-full md:px-11 lg:px-16 2xl:px-40">
+    <div className="flex flex-col gap-y-10 px-6 py-16 md:w-full md:px-16 2xl:px-24">
       
       <div className="flex items-center gap-x-2">
         <ChevronRight size={36} strokeWidth={5} />
         <h1 className="text-3xl font-bold">FROM THE COMMUNITY</h1>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-y-8 md:gap-x-6 md:gap-y-20">
+      <div className="grid grid-cols-2 items-center justify-center gap-y-8 gap-x-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 2xl:grid-cols-5">
         {pics.map((pic, i) => (
           <figure
             key={i}
-            className="flex flex-col gap-y-2 md:flex-auto md:px-0 lg:w-80"
+            className="flex flex-col gap-y-2"
           >
             {/* Image Container */}
             <Link href={`#`}>
@@ -28,7 +28,6 @@ const Feed = () => {
                 loading="eager"
                 height={500}
                 width={500}
-                className="w-full md:w-96"
               />
             </Link>
 
