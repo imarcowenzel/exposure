@@ -7,6 +7,7 @@ import { Form, useForm } from "react-hook-form";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
 import * as z from "zod";
 
+import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
 import { FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -28,7 +29,7 @@ const Search: React.FC = () => {
   });
 
   return (
-    <div className="flex min-h-[calc(100dvh-497px)] w-full flex-col items-center justify-center gap-y-10 py-12 md:min-h-[calc(100dvh-321px)] lg:min-h-[calc(100dvh-256.98px)]">
+    <Container>
       <div className="flex w-full flex-col items-center justify-center gap-y-16 ">
         <div className="flex w-11/12 flex-col items-center justify-center gap-y-2 md:w-10/12 lg:w-1/2">
           <Form {...form} className="w-full">
@@ -82,7 +83,7 @@ const Search: React.FC = () => {
             ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

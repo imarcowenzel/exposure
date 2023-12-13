@@ -1,9 +1,10 @@
+import Container from "@/components/container";
 import React from "react";
 
 const Submit = () => {
   return (
-    <div className="flex min-h-[calc(100dvh-497px)] w-full flex-col items-center justify-center gap-y-5 py-12 md:min-h-[calc(100dvh-321px)] lg:min-h-[calc(100dvh-256.98px)]">
-      <section className="flex w-full flex-col items-center justify-center gap-y-5">
+    <Container>
+      <div className="flex w-full flex-col items-center justify-center gap-y-5">
         {/* Display the image preview if available */}
         {/* {photoPreview && (
           <div className="w-3/4 md:w-2/4 lg:w-1/4">
@@ -27,10 +28,10 @@ const Submit = () => {
             isLoading={isLoading}
           />
         )} */}
-      </section>
+      </div>
 
       {/* Display the delete button when there's an image preview */}
-      <section className="flex w-11/12 items-center justify-center md:w-2/4 lg:w-1/3">
+      <div className="flex w-11/12 items-center justify-center md:w-2/4 lg:w-1/3">
         {/* {photoPreview && (
           <button
             type="button"
@@ -40,8 +41,8 @@ const Submit = () => {
             Delete photo
           </button>
         )} */}
-      </section>
-    </div>
+      </div>
+    </Container>
   );
 };
 

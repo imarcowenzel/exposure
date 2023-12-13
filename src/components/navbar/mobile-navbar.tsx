@@ -7,8 +7,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-import MobileMenu from "./mobile-menu";
+
 import MobileButtonMenu from "./mobile-menu-button";
+import MobileMenu from "./mobile-menu";
 
 const MobileNavbar = () => {
   const [isOpen, toggleMenu] = useCycle(false, true);

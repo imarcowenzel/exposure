@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@/components/container";
 import { Separator } from "@/components/ui/separator";
 import {
   Button,
@@ -19,8 +20,8 @@ const Account = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <main className="flex min-h-[calc(100dvh-497px)] w-full flex-col items-center justify-center gap-y-10 py-12 md:min-h-[calc(100dvh-321px)] lg:min-h-[calc(100dvh-256.98px)]">
-      <section className="flex w-11/12 flex-col items-center justify-center gap-y-12 md:w-2/4 lg:w-1/3">
+    <Container>
+      <div className="flex w-11/12 flex-col items-center justify-center gap-y-12 md:w-2/4 lg:w-1/3">
         {/* Account Top */}
         <div className="flex w-full">
           <div className="flex flex-1 flex-col items-center gap-y-2">
@@ -314,8 +315,8 @@ const Account = () => {
       </Modal> */}
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </Container>
   );
 };
 

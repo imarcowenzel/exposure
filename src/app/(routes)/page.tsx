@@ -1,3 +1,4 @@
+import Container from "@/components/container";
 import Feed from "@/components/feed";
 import { fetchPosts } from "@/lib/actions/post.actions";
 
@@ -6,17 +7,13 @@ const Home: React.FC = async () => {
 
   if ("success" in posts) {
     return (
-      <main className="mainContainer mx-auto">
-        <h1>No posts yet</h1>
-      </main>
+      <Container>
+        <h1 className="text-3xl">No posts yet!</h1>
+      </Container>
     );
   }
 
-  return (
-    <div className="w-full">
-      <Feed posts={posts} />
-    </div>
-  );
+  return <Feed posts={posts} />;
 };
 
 export default Home;

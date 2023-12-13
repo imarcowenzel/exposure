@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { FcGoogle as GoogleIcon } from "react-icons/fc";
 import * as z from "zod";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,11 +13,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { CircularProgress } from "@nextui-org/react";
+import Link from "next/link";
+import Container from "@/components/container";
 
 const formSchema = z
   .object({
@@ -57,8 +57,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex items-center justify-center px-9 pb-20 pt-10">
-
+    <Container>
       <div className="flex flex-col items-center gap-y-10 md:w-1/2 lg:w-1/3">
         <div>
           <h1 className="text-xl font-bold">Sign up for an account</h1>
@@ -170,7 +169,7 @@ const SignUp = () => {
           </p>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

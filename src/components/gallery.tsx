@@ -29,7 +29,7 @@ const Gallery: React.FC<GalleryProps> = ({ posts }) => {
   }
 
   return (
-    <section className="flex flex-col gap-y-10 px-7 py-16 md:w-full md:px-11 lg:px-16 2xl:px-40">
+    <div className="flex flex-col gap-y-10 px-7 py-16 md:w-full md:px-11 lg:px-16 2xl:px-40">
       <div className="flex flex-wrap items-center justify-center gap-y-8 md:gap-x-6 md:gap-y-20">
         {posts.map((post: PostType) => (
           <figure
@@ -50,7 +50,7 @@ const Gallery: React.FC<GalleryProps> = ({ posts }) => {
           </figure>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
