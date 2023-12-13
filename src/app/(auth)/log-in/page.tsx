@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import Container from "@/components/container";
-import LogInForm from "@/components/forms/log-in";
+import LogInForm from "@/components/forms/log-in-form";
 import GoogleLogInButton from "@/components/google-login-button";
 import { Separator } from "@/components/ui/separator";
 
