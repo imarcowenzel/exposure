@@ -1,23 +1,23 @@
 "use client";
 
 import { Session } from "next-auth";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { MdOutlineAddPhotoAlternate as PhotoIcon } from "react-icons/md";
+import { toast } from "sonner";
 
 import Container from "@/components/container";
-import { useState } from "react";
-import { useUploadThing } from "@/lib/utils/uploadthing";
-import { useRouter } from "next/navigation";
-import { createPost } from "@/lib/actions/post.actions";
-import { toast } from "sonner";
-import Image from "next/image";
-import SelectPhotoForm from "@/components/forms/select-photo-form";
-import CreatePostForm from "@/components/forms/create-post-form";
+import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { createPost } from "@/lib/actions/post.actions";
+import { useUploadThing } from "@/lib/utils/uploadthing";
 
 type SubmitProps = { session: Session };
 
 const Submit: React.FC<SubmitProps> = ({ session }) => {
   const { user } = session;
-
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,21 +31,16 @@ const Submit: React.FC<SubmitProps> = ({ session }) => {
   // Handle the change event when a user selects a photo
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     const fileReader = new FileReader();
-
     // Check if any files were selected
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-
       setPhotoUrl(Array.from(e.target.files));
-
       // When the FileReader finishes loading the file
       fileReader.onload = () => {
         // Set the image preview with the result as a data URL
         setPhotoPreview(fileReader.result as string);
       };
-
       fileReader.readAsDataURL(file);
     }
   };
@@ -107,34 +102,64 @@ const Submit: React.FC<SubmitProps> = ({ session }) => {
   return (
     <Container>
       <div className="flex w-4/5 flex-col items-center justify-center gap-y-5 lg:w-2/4">
-        {!photoPreview && <SelectPhotoForm onChange={handlePhotoChange} />}
+        {!photoPreview && (
+          <form noValidate className="w-full">
+            <label className="flex cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed border-neutral-300 p-14 text-neutral-600 transition hover:opacity-70 md:p-24">
+              <PhotoIcon size={50} />
+
+              <h3 className="text-md whitespace-nowrap font-semibold md:text-lg">
+                Select a photo
+              </h3>
+
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                multiple={false}
+                aria-label="Select a photo"
+                onChange={(e) => handlePhotoChange(e)}
+                className="hidden"
+              />
+            </label>
+          </form>
+        )}
 
         {/* Display the image preview if available */}
         {photoPreview && (
-          <>
-            <div className="flex flex-col items-center justify-center gap-y-5">
-              <Image
-                src={photoPreview}
-                alt="Image Preview"
-                priority
-                width={500}
-                height={500}
-              />
-              <CreatePostForm
+          <div className="flex flex-col items-center justify-center gap-y-5">
+            <Image
+              src={photoPreview}
+              alt="Image Preview"
+              priority
+              width={500}
+              height={500}
+            />
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="flex w-full flex-col items-center gap-y-5"
+            >
+              <Input
+                type="text"
+                name="tags"
+                aria-label="Tags"
+                placeholder="Add a tag (separate each tag with a comma)"
                 onChange={handleTagsChange}
-                onSubmit={handleSubmit}
-                isLoading={isLoading}
+                className="text-xs"
               />
-              <Button
-                type="button"
-                variant={"destructive"}
-                onClick={() => setPhotoPreview}
-                className="w-full"
-              >
-                Delete photo
+              <Button aria-label="Post" className="w-full">
+                {!isLoading ? "Post" : <Spinner />}
               </Button>
-            </div>
-          </>
+            </form>
+            <Button
+              type="button"
+              variant={"destructive"}
+              onClick={() => setPhotoPreview("")}
+              className="w-full"
+            >
+              Delete photo
+            </Button>
+          </div>
         )}
       </div>
     </Container>
