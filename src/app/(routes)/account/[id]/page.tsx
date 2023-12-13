@@ -10,6 +10,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { PiSignOutFill as LogOutIcon } from "react-icons/pi";
 import { RxPerson as InfoIcon } from "react-icons/rx";
@@ -31,6 +32,7 @@ const Account = () => {
           {/* <SignOutBtn /> */}
           <button
             type="button"
+            onClick={() => signOut({ callbackUrl: "/log-in" })}
             className="flex flex-1 flex-col items-center gap-y-2"
           >
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black">

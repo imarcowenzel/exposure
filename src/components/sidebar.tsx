@@ -1,14 +1,34 @@
-"use client";
-
 import { ContrastIcon, Search, Settings } from "lucide-react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
-import { menuItems } from "@/config";
-import { useState } from "react";
+import { MenuItemProps, menuItems } from "@/config";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const Sidebar: React.FC = () => {
-  const [isLogged, setLogged] = useState<boolean>(false);
+const Sidebar: React.FC = async () => {
+  const session = await getServerSession(authOptions);
+
+  const renderMenuItem = (item: MenuItemProps) => (
+    <div
+      key={item.label}
+      className={buttonVariants({
+        variant: "ghost",
+        className:
+          "w-full cursor-pointer rounded-none transition duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
+      })}
+    >
+      <Link
+        href={
+          item.label === "Profile" ? `/profile/${session?.user._id}` : item.href
+        }
+        className="flex w-full items-center gap-x-2 text-lg"
+      >
+        {<item.icon className="h-6 w-6" />}
+        {item.label}
+      </Link>
+    </div>
+  );
 
   return (
     <nav className="sticky left-0 top-0 z-20 hidden h-screen w-40 flex-col overflow-hidden bg-black text-white lg:flex">
@@ -21,29 +41,12 @@ const Sidebar: React.FC = () => {
 
       <nav className="mb-24 w-full">
         <div className="flex flex-col items-start gap-y-3">
-          {menuItems.map((item) => (
-            <div
-              key={item.label}
-              className={buttonVariants({
-                variant: "ghost",
-                className:
-                  "w-full cursor-pointer rounded-none transition duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
-              })}
-            >
-              <Link
-                href={item.href}
-                className="flex w-full items-center gap-x-2 text-lg"
-              >
-                {<item.icon className="h-6 w-6" />}
-                {item.label}
-              </Link>
-            </div>
-          ))}
+          {menuItems.map(renderMenuItem)}
         </div>
       </nav>
 
-      {isLogged ? (
-        <nav className="mt-auto pb-12 w-full">
+      {session ? (
+        <nav className="mt-auto w-full pb-12">
           <div className="flex flex-col items-start gap-y-3">
             <div
               className={buttonVariants({
@@ -68,7 +71,7 @@ const Sidebar: React.FC = () => {
               })}
             >
               <Link
-                href="/account"
+                href={`/account/${session?.user._id}`}
                 className="flex w-full items-center gap-x-2 text-lg"
               >
                 {<Settings className="h-6 w-6" />}

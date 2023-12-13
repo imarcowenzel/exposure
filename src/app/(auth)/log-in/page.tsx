@@ -16,20 +16,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-const formSchema = z
-  .object({
-    email: z
-      .string()
-      .min(5)
-      .email({ message: "Please enter a valid email address." }),
-    password: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters." }),
-  });
+const formSchema = z.object({
+  email: z
+    .string()
+    .min(5)
+    .email({ message: "Please enter a valid email address." }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters." }),
+});
 
 const LogIn = () => {
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,16 +39,41 @@ const LogIn = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const router = useRouter();
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // TODO: log-in routine
-    console.log(values);
+    const { email, password } = values;
+
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        throw new Error(res.error);
+      }
+
+      toast.success("Sign in successfully!");
+
+      router.replace("/");
+
+    } catch (error: any) {
+
+      toast.error(error.message);
+
+    } finally {
+
+      form.reset();
+
+    }
   }
 
   return (
     <div className="flex items-center justify-center px-9 pb-20 pt-10">
-
       <div className="flex flex-col items-center gap-y-10 md:w-1/2 lg:w-1/3">
-
         <div>
           <h1 className="text-xl font-bold">Log in into your account</h1>
         </div>
@@ -116,7 +142,6 @@ const LogIn = () => {
           </Button>
         </div>
       </div>
-      
     </div>
   );
 };

@@ -1,59 +1,70 @@
-import { Globe, Search, Send, Smile } from "lucide-react";
+import { Globe, LucideIcon, Search, Send, Settings, Smile } from "lucide-react";
 
-type PicsProps = {
-    href: string;
-    createdBy: string;
-}[];
+export type MenuItemProps = {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+};
 
-export const pics: PicsProps = [
-    {
-        href: "/annarodriguez1.jpg",
-        createdBy: "Anna Rodriguez"
-    },
-    {
-        href: "/annarodriguez2.jpg",
-        createdBy: "Anna Rodriguez"
-    },
-    {
-        href: "/johnsmith1.jpg",
-        createdBy: "John Smith"
-    },
-    {
-        href: "/johnsmith2.jpg",
-        createdBy: "John Smith"
-    },
-    {
-        href: "/marysantos1.jpg",
-        createdBy: "Mary Santos"
-    },
-    {
-        href: "/marysantos2.jpg",
-        createdBy: "Mary Santos"
-    },
-    {
-        href: "/peter1.jpg",
-        createdBy: "Peter"
-    },
-    {
-        href: "/peter2.jpg",
-        createdBy: "Peter"
-    },
+export type MenuItemsProps = MenuItemProps[];
+
+export const menuItems: MenuItemsProps = [
+  {
+    label: "Explore",
+    href: "/",
+    icon: Globe,
+  },
+  {
+    label: "Submit",
+    href: "/submit",
+    icon: Send,
+  },
+  {
+    label: "Profile",
+    href: "/profile",
+    icon: Smile,
+  },
 ];
 
-export const menuItems = [
-    {
-      label: "Explore",
-      href: "/",
-      icon: Globe,
-    },
-    {
-      label: "Submit",
-      href: "/submit",
-      icon: Send,
-    },
-    {
-      label: "Profile",
-      href: "/profile",
-      icon: Smile,
-    },
-  ];
+export const menuItemsMobile: MenuItemsProps = [
+  {
+    label: "Explore",
+    href: "/",
+    icon: Globe,
+  },
+  {
+    label: "Submit",
+    href: "/submit",
+    icon: Send,
+  },
+  {
+    label: "Profile",
+    href: "/profile",
+    icon: Smile,
+  },
+  {
+    label: "Search",
+    href: "/search",
+    icon: Search,
+  },
+  {
+    label: "Account",
+    href: "/account",
+    icon: Settings,
+  },
+];
+
+export const months = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];

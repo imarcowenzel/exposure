@@ -1,11 +1,11 @@
-import bcrypt from "bcrypt";
-import NextAuth, { AuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-
 import { createUserGoogle } from "@/lib/actions/user.actions";
 import User from "@/lib/models/user.model";
 import { connectToMongoDB } from "@/lib/mongodb";
+import bcrypt from "bcrypt";
+import { AuthOptions } from "next-auth";
+import NextAuth from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: AuthOptions = {
   providers: [

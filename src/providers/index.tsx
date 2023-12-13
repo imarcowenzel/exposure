@@ -2,11 +2,16 @@
 
 import { NextUIProvider } from "@nextui-org/react";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from 'sonner';
+
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <NextUIProvider>
-      <SessionProvider>{children}</SessionProvider>
+      <SessionProvider>
+        {children}
+        <Toaster position="top-center" richColors />
+        </SessionProvider>
     </NextUIProvider>
   );
 }
