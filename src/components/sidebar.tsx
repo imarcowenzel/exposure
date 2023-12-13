@@ -29,7 +29,7 @@ const Sidebar: React.FC = async () => {
               className={buttonVariants({
                 variant: "ghost",
                 className:
-                  "w-full cursor-pointer rounded-none transition duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
+                  "w-full cursor-pointer rounded-none transition-all duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
               })}
             >
               <Link
@@ -59,7 +59,7 @@ const Sidebar: React.FC = async () => {
                 className={buttonVariants({
                   variant: "ghost",
                   className:
-                    "w-full cursor-pointer rounded-none transition duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
+                    "w-full cursor-pointer rounded-none transition-all duration-500 ease-in-out hover:bg-gray-900 hover:text-white",
                 })}
               >
                 <Link
@@ -90,7 +90,7 @@ const Sidebar: React.FC = async () => {
                     ? buttonVariants({
                         variant: "outline",
                         className:
-                          "bg-black transition duration-500 ease-in-out hover:hover:bg-secondary/80",
+                          "bg-black transition-all duration-500 ease-in-out hover:hover:bg-secondary/80",
                       })
                     : buttonVariants({ variant: "secondary" })
                 }

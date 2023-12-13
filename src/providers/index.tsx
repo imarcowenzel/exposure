@@ -10,7 +10,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <NextUIProvider>
       <SessionProvider>
         {children}
-        <Toaster position="top-center" richColors />
+        <Toaster position="top-right" richColors />
         </SessionProvider>
     </NextUIProvider>
   );
