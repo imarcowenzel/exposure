@@ -4,13 +4,10 @@ import { Session } from "next-auth";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { menuItems } from "@/config";
 import {
-    MenuItemProps,
-    menuItems
-} from "@/config";
-import {
-    menuItemContentVariants,
-    menuItemVariants,
+  menuItemContentVariants,
+  menuItemVariants,
 } from "@/lib/motion/variants";
 
 type MobileMenuProps = {
@@ -24,7 +21,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   closeOnCurrent,
   session,
 }) => {
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,60 +38,73 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             className="h-full touch-none overflow-hidden bg-black px-5 py-10"
           >
             <motion.div variants={menuItemContentVariants}>
-
-              {menuItems.map((item, i) => (
+              {menuItems.default.map((item, i) => (
                 <Link
                   key={i}
-                  onClick={() => closeOnCurrent(item.label === "Profile" ? `/profile/${session?.user._id}` : item.href)}
-                  href={item.label === "Profile" ? `/profile/${session?.user._id}` : item.href}
+                  onClick={() =>
+                    closeOnCurrent(
+                      item.label === "Profile"
+                        ? `/profile/${session?.user._id}`
+                        : item.href,
+                    )
+                  }
+                  href={
+                    item.label === "Profile"
+                      ? `/profile/${session?.user._id}`
+                      : item.href
+                  }
                   className="flex items-center gap-x-3 pb-10 text-3xl tracking-widest text-white"
                 >
-                  {<item.icon />}
+                  <item.icon />
                   {item.label}
                 </Link>
               ))}
 
               {session ? (
                 <div className="flex w-full flex-col">
-                  <Link
-                    onClick={() => closeOnCurrent("/search")}
-                    href="/search"
-                    className="flex items-center gap-x-3 pb-10 text-3xl tracking-widest text-white"
-                  >
-                    <Search />
-                    Search
-                  </Link>
-                  <Link
-                    onClick={() =>
-                      closeOnCurrent(`/account/${session.user._id}`)
-                    }
-                    href={`/account/${session.user._id}`}
-                    className="flex items-center gap-x-3 pb-10 text-3xl tracking-widest text-white"
-                  >
-                    <Settings />
-                    Account
-                  </Link>
+                  {menuItems.logged.map((item) => (
+                    <Link
+                      href={
+                        item.label === "Account"
+                          ? `/account/${session.user._id}`
+                          : item.href
+                      }
+                      onClick={() =>
+                        closeOnCurrent(
+                          item.label === "Account"
+                            ? `/account/${session.user._id}`
+                            : item.href,
+                        )
+                      }
+                      className="flex items-center gap-x-3 pb-10 text-3xl tracking-widest text-white"
+                    >
+                      <item.icon />
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
               ) : (
                 <div className="flex w-full flex-col gap-y-4">
-                  <Link
-                    href="/sign-up"
-                    onClick={() => closeOnCurrent("/sign-up")}
-                    className={buttonVariants({ variant: "secondary" })}
-                  >
-                    SIGN UP
-                  </Link>
-                  <Link
-                    href="/log-in"
-                    onClick={() => closeOnCurrent("/log-in")}
-                    className={buttonVariants({
-                      variant: "outline",
-                      className:
-                        "bg-black text-white hover:hover:bg-secondary/80",
-                    })}
-                  >
-                    LOG IN
-                  </Link>
+                  {menuItems.notLogged.map((item) => (
+                    <Link
+                      href={item.href}
+                      onClick={() => closeOnCurrent(item.href)}
+                      className={
+                        item.label === "Log in"
+                          ? buttonVariants({
+                              variant: "outline",
+                              className:
+                                "bg-black uppercase text-white hover:hover:bg-secondary/80",
+                            })
+                          : buttonVariants({
+                              variant: "secondary",
+                              className: "uppercase",
+                            })
+                      }
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </motion.div>

@@ -1,19 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCycle } from "framer-motion";
 import { ContrastIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
-
-import MobileButtonMenu from "./mobile-menu-button";
-import MobileMenu from "./mobile-menu";
+import MobileButtonMenu from "@/components/navbar/mobile-menu-button";
+import MobileMenu from "@/components/navbar/mobile-menu";
 
 const MobileNavbar = () => {
-  const [isOpen, toggleMenu] = useCycle(false, true);
+
   const { data: session } = useSession();
+  const [isOpen, toggleMenu] = useCycle(false, true);
   const pathname = usePathname();
 
   const closeMenu = () => {
@@ -44,17 +44,13 @@ const MobileNavbar = () => {
 
   return (
     <nav className="sticky inset-0 z-50 h-full overflow-y-hidden lg:hidden">
-      <div className="bg-black px-5 py-3">
-        {/* Nav */}
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-x-1 text-white">
-            <ContrastIcon size={24} />
-            <h1 className="text-xs leading-loose">EXPOSURE</h1>
-          </Link>
-          <MobileButtonMenu toggleMenu={toggleMenu} isOpen={isOpen} />
-        </div>
-      </div>
-      {/* Menu */}
+      <header className="flex items-center justify-between bg-black px-5 py-3">
+        <Link href="/" className="flex items-center gap-x-1 text-white">
+          <ContrastIcon size={24} />
+          <h1 className="text-xs leading-loose">EXPOSURE</h1>
+        </Link>
+        <MobileButtonMenu toggleMenu={toggleMenu} isOpen={isOpen} />
+      </header>
       <MobileMenu
         isOpen={isOpen}
         closeOnCurrent={closeOnCurrent}

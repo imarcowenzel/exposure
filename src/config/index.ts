@@ -1,17 +1,17 @@
 import { Globe, LucideIcon, Search, Send, Settings, Smile } from "lucide-react";
 
-export interface SidebarMenuItem {
+interface MenuItem {
   label: string;
   href: string;
   icon: LucideIcon | string;
 }
 
-export type SidebarMenuItems = Record<
-  'default' | 'notLogged' | 'logged',
-  SidebarMenuItem[]
+export type MenuItems = Record<
+  "default" | "notLogged" | "logged",
+ MenuItem[]
 >;
 
-export const sidebarMenuItems: SidebarMenuItems = {
+export const menuItems: MenuItems = {
   default: [
     {
       label: "Explore",
@@ -56,34 +56,6 @@ export const sidebarMenuItems: SidebarMenuItems = {
     },
   ],
 };
-
-export const menuItemsMobile = [
-  {
-    label: "Explore",
-    href: "/",
-    icon: Globe,
-  },
-  {
-    label: "Submit",
-    href: "/submit",
-    icon: Send,
-  },
-  {
-    label: "Profile",
-    href: "/profile",
-    icon: Smile,
-  },
-  {
-    label: "Search",
-    href: "/search",
-    icon: Search,
-  },
-  {
-    label: "Account",
-    href: "/account",
-    icon: Settings,
-  },
-];
 
 export const months = [
   "january",

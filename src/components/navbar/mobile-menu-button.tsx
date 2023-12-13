@@ -15,23 +15,21 @@ const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({
   isOpen,
 }) => {
   return (
-    <div>
-      <motion.button
-        onClick={() => toggleMenu()}
-        animate={isOpen ? "open" : "closed"}
-        className="flex flex-col space-y-1.5 text-white"
-        aria-label="Toggle Menu"
-      >
-        <motion.span
-          variants={menuButtonTopVariants}
-          className="block h-px w-5 bg-white"
-        ></motion.span>
-        <motion.span
-          variants={menuButtonBottomVariants}
-          className="block h-px w-5 bg-white"
-        ></motion.span>
-      </motion.button>
-    </div>
+    <motion.button
+      onClick={() => toggleMenu()}
+      animate={isOpen ? "open" : "closed"}
+      className="flex flex-col space-y-1.5 text-white"
+      aria-label="Toggle Menu"
+    >
+      <motion.span
+        variants={menuButtonTopVariants}
+        className="block h-px w-5 bg-white"
+      ></motion.span>
+      <motion.span
+        variants={menuButtonBottomVariants}
+        className="block h-px w-5 bg-white"
+      ></motion.span>
+    </motion.button>
   );
 };
 
