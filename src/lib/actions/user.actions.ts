@@ -151,12 +151,10 @@ export async function deleteAccount({
 
 interface DeleteAccountGoogleProps {
   _id: mongoose.Schema.Types.ObjectId;
-  googleProvider: boolean;
 }
 
 export async function deleteAccountGoogle({
   _id,
-  googleProvider,
 }: DeleteAccountGoogleProps): Promise<ActionRes> {
   try {
     await connectToMongoDB();
@@ -167,7 +165,9 @@ export async function deleteAccountGoogle({
     if (user.posts.length === 0) {
       // Delete the user's account from the database
       await User.findByIdAndDelete(_id);
+
       return { success: true, message: "Account deleted successfully!" };
+
     }
 
     // Find posts with imageKeys matching user's posts

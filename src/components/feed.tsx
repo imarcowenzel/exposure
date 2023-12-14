@@ -22,7 +22,7 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
         {posts.map((post, i) => (
           <figure key={i} className="flex flex-col gap-y-2">
             {/* Image Container */}
-            <Link href={`#`}>
+            <Link href={`/post/${post._id}`}>
               <Image
                 src={post.imageUrl}
                 priority
