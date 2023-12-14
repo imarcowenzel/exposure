@@ -18,6 +18,7 @@ const Home: React.FC = async () => {
 
   return (
     <Container className="items-start px-6 py-16 md:px-16 2xl:px-24">
+      
       <div className="flex items-center gap-x-2">
         <ChevronRight size={36} strokeWidth={5} />
         <h1 className="text-3xl font-bold">FROM THE COMMUNITY</h1>

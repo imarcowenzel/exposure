@@ -21,7 +21,6 @@ const Profile = async ({
 }: {
   params: { id: mongoose.Types.ObjectId };
 }) => {
-
   if (JSON.stringify(params.id).replace(/^"(.*)"$/, "$1") === "undefined")
     redirect("/log-in");
 
@@ -55,29 +54,23 @@ const Profile = async ({
           </h3>
         </div>
       ) : (
-        <div className="flex flex-col gap-y-10 px-7 py-16 md:w-full md:px-11 lg:px-16 2xl:px-40">
-          <div className="flex flex-wrap items-center justify-center gap-y-8 md:gap-x-6 md:gap-y-20">
-            {posts.map((post: PostType) => (
-              <figure
-                key={post.imageKey}
-                className="flex flex-col items-center gap-y-2 md:flex-auto md:px-0 lg:w-80"
-              >
-                <Link href={`/post/${post._id}`}>
-                  <Image
-                    src={post.imageUrl}
-                    priority
-                    alt="Picture"
-                    loading="eager"
-                    height={345}
-                    width={345}
-                  />
-                </Link>
-              </figure>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 items-center justify-center gap-x-6 gap-y-8 px-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 md:px-16 2xl:grid-cols-5 2xl:px-24">
+          {posts.map((post: PostType) => (
+            <figure key={post.imageKey} className="flex flex-col gap-y-2">
+              <Link href={`/post/${post._id}`}>
+                <Image
+                  src={post.imageUrl}
+                  priority
+                  alt={`${post.createdBy}\`s post`}
+                  loading="eager"
+                  height={400}
+                  width={400}
+                />
+              </Link>
+            </figure>
+          ))}
         </div>
       )}
-
     </Container>
   );
 };

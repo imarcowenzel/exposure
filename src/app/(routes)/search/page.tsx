@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: "A ficctitional website to post photographies",
 };
 
-
 const SearchPage = () => {
   return (
     <Search />
