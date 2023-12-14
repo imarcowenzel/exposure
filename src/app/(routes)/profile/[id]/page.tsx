@@ -54,7 +54,7 @@ const Profile = async ({
           </h3>
         </div>
       ) : (
-        <div className="grid grid-cols-2 items-center justify-center gap-x-6 gap-y-8 px-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 md:px-16 2xl:grid-cols-5 2xl:px-24">
+        <div className="grid w-fit grid-cols-2 items-center justify-center gap-x-6 gap-y-8 px-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 md:px-16 2xl:grid-cols-5 2xl:px-24">
           {posts.map((post: PostType) => (
             <figure key={post.imageKey} className="flex flex-col gap-y-2">
               <Link href={`/post/${post._id}`}>

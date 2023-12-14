@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -17,8 +18,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { logInSchema } from "@/lib/validations/user";
+import { PiRoadHorizonDuotone } from "react-icons/pi";
 
 const LogInForm = () => {
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof logInSchema>>({
     resolver: zodResolver(logInSchema),
@@ -35,16 +38,16 @@ const LogInForm = () => {
       const res = await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/",
+        redirect: false,
       });
-
-      console.log(res)
 
       if (res?.error) {
         throw new Error(res.error);
       }
 
       toast.success("Sign in successfully!");
+
+      router.push("/");
 
     } catch (error: any) {
 
@@ -53,7 +56,7 @@ const LogInForm = () => {
     } finally {
 
       form.reset();
-
+      
     }
   };
 

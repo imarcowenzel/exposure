@@ -1,11 +1,13 @@
-import { createUserGoogle } from "@/lib/actions/user.actions";
-import User from "@/lib/models/user.model";
-import { connectToMongoDB } from "@/lib/mongodb";
 import bcrypt from "bcrypt";
 import { AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+
+import { createUserGoogle } from "@/lib/actions/user.actions";
+import User from "@/lib/models/user.model";
+import { connectToMongoDB } from "@/lib/mongodb";
+import { revalidatePath } from "next/cache";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -45,7 +47,9 @@ export const authOptions: AuthOptions = {
 
           return user;
         } catch (error: any) {
+
           throw Error(error.message);
+
         }
       },
     }),
@@ -87,6 +91,7 @@ export const authOptions: AuthOptions = {
   },
   pages: {
     signIn: "/log-in",
+    error: "/error"
   },
   session: {
     strategy: "jwt",
