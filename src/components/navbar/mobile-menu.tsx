@@ -37,7 +37,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             exit="closed"
             className="h-full touch-none overflow-hidden bg-black px-5 py-10"
           >
-            <motion.div variants={menuItemContentVariants}>
+            <motion.div variants={menuItemContentVariants} className="flex flex-col gap-y-10">
               {menuItems.default.map((item, i) => (
                 <Link
                   key={i}
@@ -53,7 +53,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                       ? `/profile/${session?.user._id}`
                       : item.href
                   }
-                  className="flex items-center gap-x-3 pb-10 text-3xl tracking-widest text-white"
+                  className="flex items-center gap-x-3 text-3xl tracking-widest text-white"
                 >
                   <item.icon />
                   {item.label}
