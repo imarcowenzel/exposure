@@ -5,6 +5,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import Modal from "@/components/modal";
+import Spinner from "@/components/spinner";
+import { Button } from "@/components/ui/button";
 import {
   deleteProfilePhoto,
   editProfilePhoto,
@@ -12,31 +14,24 @@ import {
 import { useUploadThing } from "@/lib/utils/uploadthing";
 import { UserType } from "@/types";
 
-type ChangePictureFormProps = {
-  user: UserType;
-};
-
-const ChangePictureForm: React.FC<ChangePictureFormProps> = ({ user }) => {
-
+const ChangePictureForm = ({ user }: { user: UserType }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<File[]>([]);
 
-  const { startUpload } = useUploadThing("imageUploader");
+  const { startUpload, isUploading } = useUploadThing("imageUploader");
 
   const toggleModal = () => {
     setIsModalOpen((prev: boolean) => !prev);
   };
 
   const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     e.preventDefault();
 
     const fileReader = new FileReader();
 
     // Check if any files were selected
     if (e.target.files && e.target.files.length > 0) {
-
       const file = e.target.files[0];
 
       setPhotoUrl(Array.from(e.target.files));
@@ -50,20 +45,15 @@ const ChangePictureForm: React.FC<ChangePictureFormProps> = ({ user }) => {
       fileReader.readAsDataURL(file);
 
       toggleModal();
-
     }
-
   };
 
   const handleSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-
     e.preventDefault();
 
     try {
-      toast.loading("Changing picture...");
-
       // Upload the image data using the 'startUpload' function
       const imgRes = await startUpload(photoUrl);
 
@@ -85,7 +75,7 @@ const ChangePictureForm: React.FC<ChangePictureFormProps> = ({ user }) => {
         });
         return;
       }
-      toast.dismiss();
+
       toast.success(res.message);
     } catch (error: any) {
       toast.dismiss();
@@ -96,9 +86,7 @@ const ChangePictureForm: React.FC<ChangePictureFormProps> = ({ user }) => {
   };
 
   const handleDeletePicture = async () => {
-
     try {
-
       toast.loading("Removing picture...");
 
       const RemoveProfilePhotoData = {
@@ -118,39 +106,52 @@ const ChangePictureForm: React.FC<ChangePictureFormProps> = ({ user }) => {
       toast.dismiss();
 
       toast.success(res.message);
-
     } catch (error: any) {
-
       toast.error(error.message);
-
     }
-
   };
 
   return (
-    <div className="flex items-center justify-center gap-x-6">
-
-      {/* Modal */}
+    <div className="flex  items-center justify-center gap-x-6">
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
-        <div className="flex flex-col items-center justify-center gap-y-6">
-          <div className="relative h-24 w-24 rounded-full">
-            {photoPreview && (
-              <Image
-                src={photoPreview}
-                alt="Avatar"
-                fill
-                priority
-                sizes="100svh"
-                className="rounded-full object-cover"
-              />
-            )}
-          </div>
-          <div className="flex w-full justify-center gap-x-5">
-            <button className="text-black" onClick={(e) => handleSubmit(e)}>
-              Confirm
-            </button>
-            <button onClick={toggleModal}>Delete</button>
-          </div>
+        <div className="flex min-h-[200px] flex-col items-center justify-center gap-y-6">
+          {!isUploading ? (
+            <>
+              <div className="relative h-24 w-24 rounded-full">
+                {photoPreview && (
+                  <Image
+                    src={photoPreview}
+                    alt="Avatar"
+                    fill
+                    priority
+                    sizes="100svh"
+                    className="rounded-full object-cover"
+                  />
+                )}
+              </div>
+              <div className="flex w-full justify-center gap-x-5">
+                <Button
+                  disabled={isUploading}
+                  variant={"default"}
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  Confirm
+                </Button>
+                <Button
+                  onClick={toggleModal}
+                  disabled={isUploading}
+                  variant={"destructive"}
+                >
+                  Delete
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <Spinner />
+              <h1>Changing profile picture...</h1>
+            </>
+          )}
         </div>
       </Modal>
 
@@ -167,7 +168,6 @@ const ChangePictureForm: React.FC<ChangePictureFormProps> = ({ user }) => {
       </div>
 
       <div className="flex flex-col items-start gap-y-1">
-
         <form noValidate className="flex flex-col items-start gap-y-1">
           <label className="cursor-pointer">
             <p className="whitespace-nowrap text-sm font-semibold">

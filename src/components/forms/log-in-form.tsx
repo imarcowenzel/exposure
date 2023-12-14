@@ -106,7 +106,6 @@ const LogInForm = () => {
           {form.formState.isSubmitting ? (
             <div className="flex items-center gap-x-2">
               <Spinner />
-              Logging in
             </div>
           ) : (
             "Log in"

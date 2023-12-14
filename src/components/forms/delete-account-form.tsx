@@ -1,7 +1,8 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { signOut } from "next-auth/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -9,26 +10,22 @@ import * as z from "zod";
 import Modal from "@/components/modal";
 import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
-import { deleteAccount, deleteAccountGoogle } from "@/lib/actions/user.actions";
-import { DeleteAccountSchema, UserType } from "@/types";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { deleteAccount, deleteAccountGoogle } from "@/lib/actions/user.actions";
+import { UserType } from "@/types";
 
-type DeleteAccountFormProps = {
-  user: UserType;
-};
 
 const formSchema = z.object({ password: z.string() });
 
-const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ user }) => {
+const DeleteAccountForm = ({ user }: { user: UserType }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const toggleModal = () => {

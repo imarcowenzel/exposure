@@ -3,14 +3,14 @@ import User from "@/lib/models/user.model";
 export async function validateUsername(username: string) {
   const existingUsername = await User.findOne({ username });
   if (existingUsername) {
-    throw new Error("Username already in use!");
+    throw new Error("Email or username already in use!");
   }
 }
 
 export async function validateEmail(email: string) {
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    throw new Error("Email already in use!");
+    throw new Error("Email or username already in use!");
   }
 }
 

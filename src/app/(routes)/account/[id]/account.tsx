@@ -12,11 +12,7 @@ import NewUsernameForm from "@/components/forms/new-username-form";
 import { Separator } from "@/components/ui/separator";
 import { UserType } from "@/types";
 
-type AccountProps = {
-  user: UserType;
-};
-
-const Account: React.FC<AccountProps> = ({ user }) => {
+const Account = ({ user }: { user: UserType }) => {
   return (
     <Container>
       <div className="flex w-11/12 flex-col items-center justify-center gap-y-12 md:w-1/4 2xl:w-1/5">
@@ -44,7 +40,6 @@ const Account: React.FC<AccountProps> = ({ user }) => {
 
         {/* Account Bottom */}
         <div className="flex w-full flex-col items-center justify-center gap-y-7">
-          
           <Separator className="w-1/5" />
 
           <h3 className="text-sm font-bold">Profile</h3>

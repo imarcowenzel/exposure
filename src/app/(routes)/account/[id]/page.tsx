@@ -6,18 +6,18 @@ import NotFound from "@/app/not-found";
 import Account from "./account";
 
 export const metadata: Metadata = {
-  title: "EXPOSURE | Profile",
+  title: "EXPOSURE | Account",
   description: "A ficctitional website to post photographies",
 };
 
-type AccountPageProps = {
+const AccountPage = async ({
+  params,
+}: {
   params: { id: string };
-};
+}) => {
 
-const AccountPage: React.FC<AccountPageProps> = async ({ params }) => {
   const session = await getServerSession(authOptions);
 
-  // TODO: Check why user._id is coming with quotations marks
   if (
     !session ||
     JSON.stringify(session.user._id).replace(/^"(.*)"$/, "$1") !== params.id

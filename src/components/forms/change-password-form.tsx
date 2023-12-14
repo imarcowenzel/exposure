@@ -18,10 +18,6 @@ import { changePassword } from "@/lib/actions/user.actions";
 import { changePasswordSchema } from "@/lib/validations/user";
 import { UserType } from "@/types";
 
-type ChangePasswordFormProps = {
-  user: UserType;
-};
-
 const formSchema = z
   .object({
     currentPassword: z
@@ -39,7 +35,8 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ user }) => {
+const ChangePasswordForm = ({ user }: {user: UserType}) => {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

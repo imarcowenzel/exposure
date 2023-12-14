@@ -1,9 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
+import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,11 +16,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createUser } from "@/lib/actions/user.actions";
 import { signUpSchema } from "@/lib/validations/user";
-import Spinner from "@/components/spinner";
-import { createUser, fetchUser } from "@/lib/actions/user.actions";
-import { signIn } from "next-auth/react";
-import { toast } from "sonner";
 
 const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -142,14 +142,7 @@ const SignUpForm = () => {
           disabled={form.formState.isSubmitting || !form.formState.isValid}
           className="w-full py-6"
         >
-          {form.formState.isSubmitting ? (
-            <div className="flex items-center gap-x-2">
-              <Spinner />
-              Signing up
-            </div>
-          ) : (
-            "Sign up"
-          )}
+          {form.formState.isSubmitting ? <Spinner /> : "Sign up"}
         </Button>
       </form>
     </Form>
