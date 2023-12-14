@@ -36,7 +36,7 @@ const Gallery: React.FC<GalleryProps> = ({ posts }) => {
             key={post.imageKey}
             className="flex flex-col gap-y-2 md:flex-auto md:px-0 lg:w-80"
           >
-            <Link href={`/post/#`}>
+            <Link href={`/post/${post._id}`}>
               <Image
                 src={post.imageUrl}
                 priority

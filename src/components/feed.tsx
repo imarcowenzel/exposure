@@ -35,7 +35,9 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
 
             {/* Caption Container */}
             <figcaption className="flex items-center justify-between px-2">
-              <Link href={`#`} className="flex items-center gap-x-4">
+
+              <Link href={`/profile/${post.userId}`} className="flex items-center gap-x-4">
+
                 <div className="relative h-6 w-6">
                   <Image
                     src={post.profileImage || "/assets/profile-picture.svg"}

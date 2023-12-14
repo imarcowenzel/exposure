@@ -1,75 +1,75 @@
 "use client";
 
-import { Session } from "next-auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { MdOutlineAddPhotoAlternate as PhotoIcon } from "react-icons/md";
 import { toast } from "sonner";
+import * as z from "zod";
 
 import Container from "@/components/container";
 import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createPost } from "@/lib/actions/post.actions";
 import { useUploadThing } from "@/lib/utils/uploadthing";
+import { UserType } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type SubmitProps = { session: Session };
+const formSchema = z.object({
+  tags: z.string().min(2),
+});
 
-const Submit: React.FC<SubmitProps> = ({ session }) => {
-  const { user } = session;
+const Submit = ({ user }: { user: UserType }) => {
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<File[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
-  // Get the 'startUpload' function from 'useUploadThing'
+
   const { startUpload } = useUploadThing("imageUploader");
 
-  // Get the router instance for navigation
   const router = useRouter();
 
-  // Handle the change event when a user selects a photo
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+
     const fileReader = new FileReader();
+
     // Check if any files were selected
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+
       setPhotoUrl(Array.from(e.target.files));
+
       // When the FileReader finishes loading the file
       fileReader.onload = () => {
         // Set the image preview with the result as a data URL
         setPhotoPreview(fileReader.result as string);
       };
+
       fileReader.readAsDataURL(file);
     }
   };
 
-  // Handle the change event when tags input value changes
-  const handleTagsChange = ({
-    target: { value },
-  }: React.ChangeEvent<HTMLInputElement>): void => {
-    // Split the input value by commas, trim each tag, and convert to lowercase
-    const tagsArray = value.split(",").map((tag) => tag.trim().toLowerCase());
-    // Update the 'tags' state with the trimmed and lowercase tags array
-    setTags([...tagsArray]);
-  };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      tags: "",
+    },
+  });
 
-  // Handle the form submit when the user clicks the submit button
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     try {
-      setIsLoading(true);
-
-      // Upload the image data using the 'startUpload' function
       const imgRes = await startUpload(photoUrl);
 
-      console.log(imgRes);
-
       if (imgRes && imgRes.length > 0 && user) {
-        console.log(user);
-
         const createPostData = {
           imageUrl: imgRes?.[0].url,
           createdBy: user.username,
@@ -81,21 +81,14 @@ const Submit: React.FC<SubmitProps> = ({ session }) => {
 
         const res = await createPost(createPostData);
 
-        // Check if the POST request was successful
         if (res.success === true) {
-          // Display a success toast message
           toast.success(res.message);
-          // Navigate to the user's profile page
+
           router.replace(`/profile/${user._id}`);
-          // Refresh the page to show the new post
         }
       }
     } catch (error: any) {
-      console.log(error.message);
-      // Display an error toast message
       toast.error("Failed to submit the post! Please try again.");
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -124,33 +117,68 @@ const Submit: React.FC<SubmitProps> = ({ session }) => {
           </form>
         )}
 
-        {/* Display the image preview if available */}
         {photoPreview && (
-          <div className="flex flex-col items-center justify-center gap-y-5">
+          <div className="flex w-full flex-col items-center justify-center gap-y-5">
             <Image
               src={photoPreview}
               alt="Image Preview"
               priority
-              width={500}
-              height={500}
+              loading="eager"
+              width={1368}
+              height={1368}
             />
-            <form
-              onSubmit={handleSubmit}
-              noValidate
-              className="flex w-full flex-col items-center gap-y-5"
-            >
-              <Input
-                type="text"
-                name="tags"
-                aria-label="Tags"
-                placeholder="Add a tag (separate each tag with a comma)"
-                onChange={handleTagsChange}
-                className="text-xs"
-              />
-              <Button aria-label="Post" className="w-full">
-                {!isLoading ? "Post" : <Spinner />}
-              </Button>
-            </form>
+
+            <Form {...form}>
+              <form
+                noValidate
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="flex w-full flex-col gap-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="tags"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="text"
+                          name="tags"
+                          aria-label="Tags"
+                          placeholder="Add a tag (separate each tag with a comma)"
+                          onChange={({ target: { value } }) => {
+                            // Split the input value by commas, trim each tag, and convert to lowercase
+                            const tagsArray = value
+                              .split(",")
+                              .map((tag) => tag.trim().toLowerCase());
+                            // Update the 'tags' state with the trimmed and lowercase tags array
+                            setTags([...tagsArray]);
+                            console.log(tags);
+                            field.onChange({ target: { value } });
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  disabled={form.formState.isSubmitting}
+                  variant={"outline"}
+                  className="w-full"
+                >
+                  {!form.formState.isSubmitting ? (
+                    "Post"
+                  ) : (
+                    <div className="flex gap-x-2">
+                      <Spinner />
+                      <p>Posting</p>
+                    </div>
+                  )}
+                </Button>
+              </form>
+            </Form>
+
             <Button
               type="button"
               variant={"destructive"}

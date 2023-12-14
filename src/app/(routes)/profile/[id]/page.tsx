@@ -1,17 +1,21 @@
 import mongoose from "mongoose";
 
 import NotFound from "@/app/not-found";
+import Container from "@/components/container";
 import Gallery from "@/components/gallery";
 import User from "@/components/user";
 import { fetchPostsByUserId } from "@/lib/actions/post.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
-import Container from "@/components/container";
+import { redirect } from "next/navigation";
 
 const Profile = async ({
   params,
 }: {
   params: { id: mongoose.Types.ObjectId };
 }) => {
+
+  if (JSON.stringify(params.id).replace(/^"(.*)"$/, '$1') === "undefined") redirect("/log-in")
+
   const [user, posts] = await Promise.all([
     fetchUser(params.id),
     fetchPostsByUserId(params.id),

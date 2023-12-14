@@ -1,15 +1,18 @@
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-import Submit from "./submit";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import NotFound from "@/app/not-found";
+import Submit from "./submit";
 
-const SubmitPage = async () => {
+const SubmitPage: React.FC = async () => {
+
   const session = await getServerSession(authOptions);
 
-  if (!session) <NotFound />;
+  if (!session) redirect("/log-in");
 
-  return <Submit session={session} />;
+  const { user } = session;
+
+  return <Submit user={user} />;
 };
 
 export default SubmitPage;
