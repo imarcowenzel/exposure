@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const SignUp = () => {
   return (
     <Container>
-      <div className="flex flex-col items-center gap-y-10 md:w-1/2 lg:w-1/3">
+      <div className="flex w-10/12 flex-col items-center gap-y-10 md:w-1/2 lg:w-1/3">
         <h1 className="text-xl font-bold">Sign up for an account</h1>
         <SignUpForm />
         <Link href="/log-in" className="text-sm font-bold underline">
