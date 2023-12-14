@@ -3,11 +3,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
+import { toast } from "sonner";
 import * as z from "zod";
 
 import Container from "@/components/container";
+import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,8 +23,6 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { fetchPostsByTagOrAuthor } from "@/lib/actions/post.actions";
 import { PostType } from "@/types";
-import { useState } from "react";
-import { toast } from "sonner";
 
 const formSchema = z.object({
   query: z.string().min(1, {
@@ -39,12 +40,8 @@ const Search: React.FC = () => {
     },
   });
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const handleSearch = async (value: z.infer<typeof formSchema>) => {
     try {
-      setIsLoading(true);
-
       const res = await fetchPostsByTagOrAuthor(value.query.toLowerCase());
 
       if ("success" in res) {
@@ -55,8 +52,6 @@ const Search: React.FC = () => {
     } catch (error: any) {
       toast.error(error.message);
     } finally {
-      setIsLoading(false);
-
       if (form.reset) form.reset();
     }
   };
@@ -91,7 +86,11 @@ const Search: React.FC = () => {
                 )}
               />
               <Button variant={"ghost"} className="hover:bg-transparent">
-                <SearchIcon className="text-2xl" />
+                {!form.formState.isSubmitting ? (
+                  <SearchIcon className="text-2xl" />
+                ) : (
+                  <Spinner />
+                )}
               </Button>
             </form>
           </Form>
@@ -99,27 +98,54 @@ const Search: React.FC = () => {
           <Separator className="flex justify-center" />
         </div>
 
-        <div className="grid grid-cols-2 items-center justify-center gap-x-6 gap-y-8 px-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 md:px-16 2xl:grid-cols-5 2xl:px-24">
-          {searchResults &&
-            searchResults.length > 0 &&
-            searchResults.map((post) => (
+        {searchResults?.length === 0 && (
+          <div className="flex items-center justify-center">
+            <h1>No results found for your search.</h1>
+          </div>
+        )}
+
+        {searchResults && searchResults.length > 0 && (
+          <div className="grid grid-cols-2 items-center justify-center gap-x-6 gap-y-8 px-6 md:grid-cols-3 md:gap-x-6 md:gap-y-20 md:px-16 2xl:grid-cols-5 2xl:px-24">
+            {searchResults.map((post) => (
               <figure
                 key={JSON.stringify(post._id)}
                 className="flex flex-col gap-y-2"
               >
-                <Link href={`#`}>
+                <Link href={`/post/${post._id}`}>
                   <Image
                     src={post.imageUrl}
                     priority
-                    alt="Picture"
+                    alt={`${post.createdBy}\`s post`}
                     loading="eager"
-                    height={500}
-                    width={500}
+                    height={400}
+                    width={400}
                   />
                 </Link>
+
+                {/* Caption Container */}
+                <figcaption className="flex items-center justify-between px-2">
+                  <Link
+                    href={`/profile/${post.userId}`}
+                    className="flex items-center gap-x-4"
+                  >
+                    <div className="relative h-6 w-6">
+                      <Image
+                        src={post.profileImage || "/assets/profile-picture.svg"}
+                        alt={`${post.createdBy}\`s profile picture`}
+                        fill
+                        priority
+                        sizes="100svh"
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+
+                    <p className="text-xs text-[#737373]">{`${post.createdBy}`}</p>
+                  </Link>
+                </figcaption>
               </figure>
             ))}
-        </div>
+          </div>
+        )}
       </div>
     </Container>
   );

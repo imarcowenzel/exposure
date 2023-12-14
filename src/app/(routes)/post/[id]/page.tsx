@@ -12,7 +12,6 @@ import Container from "@/components/container";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
-
 export const metadata: Metadata = {
   title: "EXPOSURE | Post",
   description: "A ficctitional website to post photographies",
