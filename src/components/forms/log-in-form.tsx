@@ -38,15 +38,22 @@ const LogInForm = () => {
         callbackUrl: "/",
       });
 
+      console.log(res)
+
       if (res?.error) {
         throw new Error(res.error);
       }
 
       toast.success("Sign in successfully!");
+
     } catch (error: any) {
+
       toast.error(error.message);
+
     } finally {
+
       form.reset();
+
     }
   };
 

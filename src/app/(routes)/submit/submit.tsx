@@ -167,14 +167,7 @@ const Submit = ({ user }: { user: UserType }) => {
                   variant={"outline"}
                   className="w-full"
                 >
-                  {!form.formState.isSubmitting ? (
-                    "Post"
-                  ) : (
-                    <div className="flex gap-x-2">
-                      <Spinner />
-                      <p>Posting</p>
-                    </div>
-                  )}
+                  {!form.formState.isSubmitting ? "Post" : <Spinner />}
                 </Button>
               </form>
             </Form>

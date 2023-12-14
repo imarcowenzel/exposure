@@ -61,7 +61,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
 
               {session ? (
-                <div className="flex w-full flex-col">
+                <div className="flex w-full flex-col gap-y-10">
                   {menuItems.logged.map((item) => (
                     <Link
                       href={
@@ -76,7 +76,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                             : item.href,
                         )
                       }
-                      className="flex items-center gap-x-3 pb-10 text-3xl tracking-widest text-white"
+                      className="flex items-center gap-x-3 text-3xl tracking-widest text-white"
                     >
                       <item.icon />
                       {item.label}
