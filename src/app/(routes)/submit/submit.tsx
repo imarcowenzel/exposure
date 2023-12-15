@@ -94,7 +94,7 @@ const Submit = ({ user }: { user: UserType }) => {
   };
 
   return (
-    <Container>
+    <Container className="h-[768px] md:h-0">
       <div className="flex w-4/5 flex-col items-center justify-center gap-y-5 lg:w-2/4">
         {!photoPreview && (
           <form noValidate className="w-full">

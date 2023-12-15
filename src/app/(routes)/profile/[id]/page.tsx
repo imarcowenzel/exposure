@@ -35,7 +35,7 @@ const Profile = async ({
   }
 
   return (
-    <Container>
+    <Container className="h-[768px] md:h-0">
       <div className="h-full w-full">
         <User src={user.image} username={user.username} />
       </div>
