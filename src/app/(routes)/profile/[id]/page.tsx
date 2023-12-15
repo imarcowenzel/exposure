@@ -46,7 +46,7 @@ const Profile = async ({
 
       {posts.length === 0 ? (
         <div className="flex items-center justify-center">
-          <h3 className="whitespace-nowrap text-sm">
+          <h3 className="whitespace-nowrap text-sm px-6 md:px-0">
             You have no posts yet! Submit your first post{" "}
             <Link href={"/submit"} className="text-blue-500">
               here
