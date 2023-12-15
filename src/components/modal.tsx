@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -7,9 +9,17 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isOpen]);
+
   const modalClasses = isOpen
-    ? "fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out touch-none"
+    ? "fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out touch-none overflow-hidden"
     : "fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none touch-none";
 
   return (
