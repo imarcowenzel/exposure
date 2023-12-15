@@ -58,7 +58,7 @@ const Search = () => {
   };
 
   return (
-    <Container className="h-[768px] md:h-0">
+    <Container className="min-h-[600px] md:h-auto">
       <div className="flex w-full flex-col items-center gap-y-16">
         <div className="flex w-11/12 flex-col items-center justify-center gap-y-2 md:w-10/12 lg:w-1/2">
           <Form {...form}>

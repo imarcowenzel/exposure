@@ -9,10 +9,10 @@ const Footer = () => {
       {/* Footer Top */}
       <div className="w-full">
         {/* Logo Container */}
-        <div className="flex w-full items-center justify-center gap-x-2">
+        <Link href="/" className="flex w-full items-center justify-center gap-x-2">
           <ContrastIcon className="h-20 w-20 text-white" />
           <h1 className="text-3xl text-white">EXPOSURE</h1>
-        </div>
+        </Link>
       </div>
 
       <span className="block h-[1px] bg-[#222222]"></span>

@@ -35,7 +35,7 @@ const Profile = async ({
   }
 
   return (
-    <Container className="h-[768px] md:h-0">
+    <Container className="min-h-[600px] md:h-auto">
       <div className="h-full w-full">
         <User src={user.image} username={user.username} />
       </div>
@@ -44,7 +44,7 @@ const Profile = async ({
         <h2 className="bg-black px-4 py-1 text-white">Gallery</h2>
       </div>
 
-      {!posts ? (
+      {posts.length === 0 ? (
         <div className="flex items-center justify-center">
           <h3 className="whitespace-nowrap text-sm">
             You have no posts yet! Submit your first post{" "}
