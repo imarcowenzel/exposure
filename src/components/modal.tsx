@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-
+  
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     : "fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none touch-none";
 
   return (
-    <div className={modalClasses}>
+    <div className={modalClasses} >
       <div className="absolute h-full w-full bg-gray-900 opacity-50"></div>
 
       <div className=" z-50 mx-auto w-11/12 overflow-y-hidden rounded bg-white shadow-lg md:max-w-md">
