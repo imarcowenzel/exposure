@@ -21,6 +21,7 @@ const Profile = async ({
 }: {
   params: { id: mongoose.Types.ObjectId };
 }) => {
+  
   if (JSON.stringify(params.id).replace(/^"(.*)"$/, "$1") === "undefined")
     redirect("/log-in");
 

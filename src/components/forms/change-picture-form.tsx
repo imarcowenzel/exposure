@@ -15,6 +15,7 @@ import { useUploadThing } from "@/lib/utils/uploadthing";
 import { UserType } from "@/types";
 
 const ChangePictureForm = ({ user }: { user: UserType }) => {
+  
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<File[]>([]);

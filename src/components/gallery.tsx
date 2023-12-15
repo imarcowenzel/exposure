@@ -5,11 +5,8 @@ import NotFound from "@/app/not-found";
 import { PostType } from "@/types";
 import { ActionRes } from "@/types/index";
 
-type GalleryProps = {
-  posts: PostType[] | ActionRes;
-};
+const Gallery = ({ posts }: {posts: PostType[] | ActionRes;}) => {
 
-const Gallery: React.FC<GalleryProps> = ({ posts }) => {
   if ("success" in posts) {
     return <NotFound />;
   }

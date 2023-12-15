@@ -30,7 +30,8 @@ const formSchema = z.object({
   }),
 });
 
-const Search: React.FC = () => {
+const Search = () => {
+
   const [searchResults, setSearchResults] = useState<PostType[] | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({

@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import NotFound from "@/app/not-found";
 import { fetchPostByPostId } from "@/lib/actions/post.actions";
 import Edit from "./edit";
+
+export const metadata: Metadata = {
+  title: "EXPOSURE | Post",
+  description: "A ficctitional website to post photographies",
+};
 
 const EditPage = async ({
   params,

@@ -1,5 +1,6 @@
+import { ReactNode } from "react";
+
 import { cn } from "@/lib/utils";
-import React, { ReactNode } from "react";
 
 const Container = ({
   children,

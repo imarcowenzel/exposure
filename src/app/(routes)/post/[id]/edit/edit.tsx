@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import CloseButton from "@/app/(routes)/post/[id]/close-button";
 import Container from "@/components/container";
 import Modal from "@/components/modal";
 import Spinner from "@/components/spinner";
@@ -22,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { deletePost, editPost } from "@/lib/actions/post.actions";
 import { PostType, UserType } from "@/types";
-import CloseButton from "../close-button";
 
 type EditProps = {
   user: UserType;
@@ -35,7 +35,6 @@ const formSchema = z.object({
 
 const Edit: React.FC<EditProps> = ({ user, post }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
 
@@ -54,7 +53,6 @@ const Edit: React.FC<EditProps> = ({ user, post }) => {
 
   const handleEdit = async () => {
     try {
-      setIsEditing(true);
 
       const editPostData = {
         _id: post._id,
@@ -70,9 +68,7 @@ const Edit: React.FC<EditProps> = ({ user, post }) => {
       toast.success(res.message);
     } catch (error: any) {
       toast.error(error.message);
-    } finally {
-      setIsEditing(false);
-    }
+    } 
   };
 
   const handleDeletePost = async () => {

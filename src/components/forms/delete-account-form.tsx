@@ -26,6 +26,7 @@ import { UserType } from "@/types";
 const formSchema = z.object({ password: z.string() });
 
 const DeleteAccountForm = ({ user }: { user: UserType }) => {
+  
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const toggleModal = () => {

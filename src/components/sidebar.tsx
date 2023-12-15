@@ -6,7 +6,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { buttonVariants } from "@/components/ui/button";
 import { menuItems } from "@/config";
 
-const Sidebar: React.FC = async () => {
+const Sidebar = async () => {
+  
   const session = await getServerSession(authOptions);
 
   return (

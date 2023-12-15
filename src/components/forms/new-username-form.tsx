@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -18,10 +17,6 @@ import { Input } from "@/components/ui/input";
 import { editUsername } from "@/lib/actions/user.actions";
 import { UserType } from "@/types";
 
-type NewUsernameFormProps = {
-  user: UserType;
-};
-
 const formSchema = z.object({
   newUsername: z
     .string()
@@ -29,7 +24,7 @@ const formSchema = z.object({
     .max(15),
 });
 
-const NewUsernameForm: React.FC<NewUsernameFormProps> = ({ user }) => {
+const NewUsernameForm = ({ user }: {user: UserType}) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

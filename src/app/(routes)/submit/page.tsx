@@ -4,8 +4,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Submit from "./submit";
 
-const SubmitPage: React.FC = async () => {
-
+const SubmitPage = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) redirect("/log-in");

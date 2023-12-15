@@ -1,7 +1,7 @@
 import { ContrastIcon } from "lucide-react";
 import Link from "next/link";
 
-const Footer: React.FC = () => {
+const Footer = () => {
 
   return (
 

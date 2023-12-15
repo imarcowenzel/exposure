@@ -8,6 +8,7 @@ import { FcGoogle as GoogleIcon } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 
 const GoogleLogInButton = () => {
+  
   const router = useRouter();
 
   const logInWithGoogle = async () => {

@@ -5,7 +5,8 @@ import Link from "next/link";
 import Container from "@/components/container";
 import { fetchPosts } from "@/lib/actions/post.actions";
 
-const Home: React.FC = async () => {
+const Home = async () => {
+  
   const posts = await fetchPosts();
 
   if ("success" in posts) {

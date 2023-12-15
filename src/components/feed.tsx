@@ -5,14 +5,10 @@ import Link from "next/link";
 import { PostType } from "@/types";
 import Container from "./container";
 
-type FeedProps = {
-  posts: PostType[];
-};
-
-const Feed: React.FC<FeedProps> = ({ posts }) => {
+const Feed = ({ posts }: { posts: PostType[] }) => {
+  
   return (
     <Container className="items-start px-6 py-16 md:px-16 2xl:px-24">
-
       <div className="flex items-center gap-x-2">
         <ChevronRight size={36} strokeWidth={5} />
         <h1 className="text-3xl font-bold">FROM THE COMMUNITY</h1>
@@ -35,9 +31,10 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
 
             {/* Caption Container */}
             <figcaption className="flex items-center justify-between px-2">
-
-              <Link href={`/profile/${post.userId}`} className="flex items-center gap-x-4">
-
+              <Link
+                href={`/profile/${post.userId}`}
+                className="flex items-center gap-x-4"
+              >
                 <div className="relative h-6 w-6">
                   <Image
                     src={post.profileImage || "/assets/profile-picture.svg"}
@@ -55,7 +52,6 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
           </figure>
         ))}
       </div>
-
     </Container>
   );
 };

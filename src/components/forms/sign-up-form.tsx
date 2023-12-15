@@ -20,6 +20,7 @@ import { createUser } from "@/lib/actions/user.actions";
 import { signUpSchema } from "@/lib/validations/user";
 
 const SignUpForm = () => {
+  
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {

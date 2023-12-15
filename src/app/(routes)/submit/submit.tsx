@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -22,13 +23,13 @@ import { Input } from "@/components/ui/input";
 import { createPost } from "@/lib/actions/post.actions";
 import { useUploadThing } from "@/lib/utils/uploadthing";
 import { UserType } from "@/types";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
   tags: z.string().min(2),
 });
 
 const Submit = ({ user }: { user: UserType }) => {
+
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<File[]>([]);
   const [tags, setTags] = useState<string[]>([]);
