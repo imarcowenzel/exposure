@@ -21,7 +21,6 @@ const Profile = async ({
 }: {
   params: { id: mongoose.Types.ObjectId };
 }) => {
-  
   if (JSON.stringify(params.id).replace(/^"(.*)"$/, "$1") === "undefined")
     redirect("/log-in");
 
@@ -46,8 +45,10 @@ const Profile = async ({
 
       {posts.length === 0 ? (
         <div className="flex items-center justify-center">
-          <h3 className="whitespace-nowrap text-sm px-6 md:px-0">
-            You have no posts yet! Submit your first post{" "}
+          <h3 className="text-center text-sm">
+            You have no posts yet!
+            <br />
+            Submit your first post{" "}
             <Link href={"/submit"} className="text-blue-500">
               here
             </Link>
