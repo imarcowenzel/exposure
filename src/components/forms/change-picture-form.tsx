@@ -15,7 +15,6 @@ import { useUploadThing } from "@/lib/utils/uploadthing";
 import { UserType } from "@/types";
 
 const ChangePictureForm = ({ user }: { user: UserType }) => {
-  
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoUrl, setPhotoUrl] = useState<File[]>([]);
@@ -149,8 +148,8 @@ const ChangePictureForm = ({ user }: { user: UserType }) => {
             </>
           ) : (
             <>
-              <Spinner />
-              <h1>Changing profile picture...</h1>
+              <Spinner className="h-8 w-8" />
+              <h1 className="text-lg">Changing profile picture...</h1>
             </>
           )}
         </div>
