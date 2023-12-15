@@ -17,7 +17,7 @@ const Error = ({
   }, [error]);
 
   return (
-    <Container>
+    <Container className="h-[600px] md:h-0">
       <h1 className="text-2xl font-semibold">Something went wrong!</h1>
     </Container>
   );

@@ -18,9 +18,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { logInSchema } from "@/lib/validations/user";
-import { PiRoadHorizonDuotone } from "react-icons/pi";
 
 const LogInForm = () => {
+
   const router = useRouter();
 
   const form = useForm<z.infer<typeof logInSchema>>({
@@ -48,15 +48,10 @@ const LogInForm = () => {
       toast.success("Sign in successfully!");
 
       router.push("/");
-
     } catch (error: any) {
-
       toast.error(error.message);
-
     } finally {
-
       form.reset();
-      
     }
   };
 
@@ -65,7 +60,7 @@ const LogInForm = () => {
       <form
         noValidate
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-6"
+        className="w-full relative space-y-6"
       >
         <FormField
           name="email"
